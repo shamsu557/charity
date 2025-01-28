@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEKURE FOUNDATION</title>
+    <meta name="google-site-verification" content="mycKC9SQwwlvQLn-w6DpZdvZn0KT2VUqJf4U0VM3-Xo">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    
+    
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">Sekure Foundation</a>
+        <!-- Navbar Toggler Button (visible by default) -->
+        <button class="navbar-toggler" id="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Cancel Button (hidden by default) -->
+        <button class="navbar-cancel d-lg-none" id="navbar-cancel" type="button" style="display: none;">
+            <span>&times;</span> <!-- Times symbol for cancel -->
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#media">Media</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                <!-- Donate Button -->
+                <li class="nav-item">
+                    <a class="btn btn-success text-white" href="#" role="button">Donate</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section class="hero-section">
+    <div class="carousel-items">
+        <div class="carousel-item" 
+            data-image="sekure.jpg" 
+            data-message="SEKURE FOUNDATION" 
+            data-subtext="Creating sustainable social impact for underprivileged communities.">
+        </div>
+        <div class="carousel-item" 
+            data-image="Orphan.jpg" 
+            data-message="Support for Orphans" 
+            data-subtext="Providing meals, education, and essential care to vulnerable children.">
+        </div>
+        <div class="carousel-item" 
+            data-image="Empower.jpg" 
+            data-message="Empowerment Programs" 
+            data-subtext="Offering training and resources for widows, female divorcees, and families in need.">
+        </div>
+        <div class="carousel-item" 
+            data-image="Liveli.jpg" 
+            data-message="Building Brighter Futures" 
+            data-subtext="Helping families and individuals achieve sustainable livelihoods.">
+        </div>
+    </div>
+</section>
+
+<section id="about" class="container text-center">
+    <h2>About SEKURE FOUNDATION</h2>
+    <p>SEKURE FOUNDATION is dedicated to creating sustainable social impact through initiatives aimed at feeding orphanages, eradicating poverty through empowerment programs, and assisting underprivileged individuals in achieving social integration and personal growth.</p>
+</section>
+
+<section id="mission-vision" class="container text-center">
+    <div>
+        <h3>Mission</h3>
+        <p>Our mission is to empower and support vulnerable groups, including orphans, widows, divorced women, and underprivileged youth, by providing meals, education, and resources to help them overcome poverty, build brighter futures, and achieve social inclusion and personal growth.</p>
+    </div>
+    <div>
+        <h3>Vision</h3>
+        <p>We envision a society where every orphan, widow, divorced woman, and underprivileged youth has the opportunity to thrive, with access to essential care, empowerment programs, and opportunities for sustainable livelihoods, fostering a more inclusive and equitable community.</p>
+    </div>
+</section>
+
+<section id="founder" class="container text-center">
+    <h2>About the Founder</h2>
+    <div class="founder-info">
+        <img src="founder.jpg" alt="Founder Image" class="img-fluid rounded-circle" style="width: 200px; height: 200px;">
+        <p class="mt-3">Our founder, [Founder Name], is a passionate advocate for social change and the well-being of underprivileged communities. With a vision to create sustainable impact, [Founder Name] established SEKURE FOUNDATION to support orphans, widows, divorced women, and youth, empowering them to build better futures and foster inclusion in society.</p>
+    </div>
+</section>
+
+<!-- Contact Form Section -->
+<div class="row">
+    <!-- Get in Touch Column -->
+    <div class="col-lg-6 mb-4">
+        <h2 class="text-white text-center bg-dark">Get in Touch</h2>
+        <form id="contactForm" method="POST" action="/send-message">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Your Full Name" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+            </div>
+            <div class="text-center">
+            <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Donate Column -->
+    <div class="col-lg-6 mb-4">
+        <h2 class="text-white text-center bg-dark">Donate</h2>
+        <p class="text-center">Your generous donations help us support orphans, widows, divorced women, and underprivileged youth in our community. Please consider making a contribution to help us continue our mission.</p>
+        <div class="text-center">
+            <a href="#" class="btn btn-success">Donate Now</a>
+        </div>
+    </div>
+</div>
+
+ <!-- Footer -->
+ <div class="footer bg-light mt-5">
+    <div class="row text-center py-3">
+        <div class="col-md-4">
+            <p><strong>Sekure Foundation</strong></p>
+            <p>Address</p>
+            <p>Email: info@sekurefoundation.com</p>
+            <p>Phone: 08030999939</p>
+        </div>
+        <div class="col-md-4">
+            <a href="https://www.facebook.com/prof.johndoe" target="_blank" class="d-block mb-2">
+                <i class="fab fa-facebook"></i> Facebook
+            </a>
+            <a href="https://www.instagram.com/prof.johndoe" target="_blank" class="d-block mb-2">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="https://twitter.com/prof_johndoe" target="_blank" class="d-block mb-2">
+                <i class="fab fa-twitter"></i> Twitter
+            </a>
+            <a href="https://wa.me/1234567890" target="_blank" class="d-block mb-2">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+        </div>
+        <div class="col-md-4">
+            <p>&copy; Sekure 2025</p>
+            <p>All rights reserved.</p>
+        </div>
+    </div>
+</div>
+<!-- Back to top button -->
+<button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.carousel-item');
+    const heroSection = document.querySelector('.hero-section');
+    const captions = document.createElement('div');
+    captions.classList.add('carousel-caption');
+    heroSection.appendChild(captions);
+
+    let index = 0;
+
+    const updateCaption = () => {
+        const currentItem = items[index];
+        const imageUrl = currentItem.getAttribute('data-image'); // Fetch image URL
+        
+        // Update hero section background
+        heroSection.style.backgroundImage = `url(${imageUrl})`;
+
+        // Update captions directly below the image
+        captions.innerHTML = `
+            <h2>${currentItem.getAttribute('data-message')}</h2>
+            <p>${currentItem.getAttribute('data-subtext')}</p>
+        `;
+
+        index = (index + 1) % items.length;
+    };
+
+    updateCaption();
+    setInterval(() => {
+        updateCaption();
+    }, 6000); // Match animation duration
+});
+
+// Back to top button functionality
+window.onscroll = function () {
+        scrollFunction();
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("myBtn").style.display = "block";
+        } else {
+            document.getElementById("myBtn").style.display = "none";
+        }
+    }
+
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+
+    </script>
+</body>
+</html>

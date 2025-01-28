@@ -1,0 +1,211 @@
+/* Navbar Styles */
+.navbar-brand {
+    color: #f8f9fa;
+    font-weight: bold;
+}
+
+.navbar-brand:hover {
+    color: #ffffff; /* Keep white on hover */
+}
+
+.nav-link {
+    color: #060607 !important;
+    font-size: 16px;
+}
+
+.nav-link:hover {
+    color: #d7cfcf !important; /* Dark text color */
+    background-color: #847e7e; /* Light background color */
+}
+
+.navbar-toggler {
+    display: block;
+    background-color: white !important;
+    border: none;
+    position: absolute;
+    top: 10px;
+    right: 10px; /* Proper alignment */
+    z-index: 1031;
+}
+
+.navbar-toggler-icon {
+    width: 30px;
+    height: 3px;
+    background-color: black !important;
+    border-radius: 1px;
+    position: relative;
+}
+
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after {
+    content: '';
+    width: 30px;
+    height: 3px;
+    background-color: black;
+    position: absolute;
+    left: 0;
+    border-radius: 1px;
+}
+
+.navbar-toggler-icon::before {
+    top: -8px; /* Space above middle line */
+}
+
+.navbar-toggler-icon::after {
+    top: 8px; /* Space below middle line */
+}
+
+@media (max-width: 768px) {
+    .navbar-collapse {
+        background-color: #d3d7db; /* Match navbar background */
+        padding: 15px;
+    }
+
+    .nav-link {
+        display: block;
+        text-align: center;
+        padding: 10px;
+        font-size: 1rem;
+    }
+
+    /* Center the "Donate" button */
+    .navbar-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .navbar-nav .nav-item {
+        width: 100%;
+        text-align: center;
+    }
+
+    .navbar-nav .btn.btn-success {
+        margin-top: 10px; /* Add some spacing above the donate button */
+    }
+}
+
+/* Hero Section Styles */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 70vh; /* Proper height for large screens */
+    display: flex;
+    align-items: center; /* Center content vertically */
+    justify-content: flex-start; /* Align content to the left */
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.hero-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Maintain aspect ratio without cutting */
+}
+
+.carousel-caption {
+    position: absolute;
+    top: 50%; /* Center vertically */
+    left: 5%; /* Align to the left */
+    transform: translateY(-50%); /* Adjust for perfect centering */
+    color: #fff;
+    text-align: left; /* Align text to the left */
+    background-color: rgba(96, 91, 91, 0.8); /* Darker background for better visibility */
+    padding: 40px 30px; /* Increased padding for height */
+    border-radius: 10px; /* Smooth rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    max-width: 800px; /* Limit width for readability */
+    width: auto; /* Dynamically adjust to fit content */
+    min-height: 200px; /* Ensures background is tall enough for content */
+}
+
+.carousel-caption h2 {
+    font-size: 3rem; /* Prominent text size */
+    font-weight: 900; /* Very bold */
+    margin: 0;
+}
+
+.carousel-caption p {
+    font-size: 1.5rem; /* Slightly smaller than h2 */
+    font-weight: 700; /* Bold text */
+    margin: 10px 0 0; /* Spacing below heading */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+    .hero-section {
+        height: 60vh; /* Reduced height for smaller screens */
+    }
+
+    .carousel-caption {
+        left: 8%; /* Adjusted left position */
+        padding: 30px 15px; /* Reduced padding */
+    }
+
+    .carousel-caption h2 {
+        font-size: 2.5rem; /* Adjust text size */
+    }
+
+    .carousel-caption p {
+        font-size: 1.25rem; /* Smaller text for smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        height: 50vh; /* Reduced height on mobile */
+    }
+
+    .carousel-caption {
+        left: 10%; /* Further adjustment for smaller screens */
+        padding: 20px 10px; /* Compact padding for mobile */
+    }
+
+    .carousel-caption h2 {
+        font-size: 2rem; /* Further reduced text size */
+    }
+
+    .carousel-caption p {
+        font-size: 1rem; /* Compact size for smaller screens */
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-section {
+        height: 45vh; /* Ensure height fits mobile */
+    }
+
+    .carousel-caption {
+        left: 8%; /* Ensure text fits mobile view */
+        padding: 15px 8px; /* Reduced padding for very small screens */
+        max-width: 90%; /* Ensure text background doesn't overflow */
+    }
+
+    .carousel-caption h2 {
+        font-size: 1.75rem; /* Smaller heading size */
+    }
+
+    .carousel-caption p {
+        font-size: 0.9rem; /* Smaller paragraph size */
+    }
+}
+#myBtn {
+    display: none;
+    position: fixed;
+    bottom: 15px;
+    right: 30px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background: linear-gradient(45deg, #54585a, #202223);
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+    }
+    
+    #myBtn:hover {
+    background-color: #1c6474;
+    }
