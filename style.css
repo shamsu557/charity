@@ -1,4 +1,14 @@
-/* Navbar Styles */
+/* Navbar /* Navbar Styles */
+.navbar {
+    position: fixed; /* Makes the navbar fixed */
+    top: 0;          /* Positions the navbar at the top */
+    left: 0;
+    right: 0;
+    z-index: 1030;   /* Ensures it stays on top of other elements */
+    background-color: #212529; /* Ensure consistent background */
+}Styles */
+
+
 .navbar-brand {
     color: #f8f9fa;
     font-weight: bold;
@@ -54,6 +64,14 @@
 .navbar-toggler-icon::after {
     top: 8px; /* Space below middle line */
 }
+.navbar-cancel {
+    display: none;
+    background:white;
+    border: none;
+    font-size: 1.5rem;
+    color: black;
+}
+
 
 @media (max-width: 768px) {
     .navbar-collapse {
@@ -66,6 +84,11 @@
         text-align: center;
         padding: 10px;
         font-size: 1rem;
+    }
+
+
+    .navbar-cancel {
+        display: none;
     }
 
     /* Center the "Donate" button */
@@ -107,18 +130,20 @@
 
 .carousel-caption {
     position: absolute;
-    top: 50%; /* Center vertically */
-    left: 5%; /* Align to the left */
-    transform: translateY(-50%); /* Adjust for perfect centering */
-    color: #fff;
-    text-align: left; /* Align text to the left */
-    background-color: rgba(96, 91, 91, 0.8); /* Darker background for better visibility */
+    top: 0; /* Position at the top */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for perfect centering */
     padding: 40px 30px; /* Increased padding for height */
+    background-color: rgba(0, 0, 0, 0.7); /* Darker background for readability */
     border-radius: 10px; /* Smooth rounded corners */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow */
     max-width: 800px; /* Limit width for readability */
     width: auto; /* Dynamically adjust to fit content */
-    min-height: 200px; /* Ensures background is tall enough for content */
+    min-height: 230px; /* Ensures background is tall enough for content */
+    display: flex;
+    flex-direction: column; /* Arrange text vertically */
+    justify-content: center; /* Center text vertically */
+    text-align: center; /* Center text horizontally */
 }
 
 .carousel-caption h2 {
@@ -133,64 +158,108 @@
     margin: 10px 0 0; /* Spacing below heading */
 }
 
+/* Hero Section Styles */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 70vh; /* Default height */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center content */
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+/* Default caption behavior */
+.carousel-caption {
+    position: absolute;
+    top: 50%; /* Center caption vertically */
+    left: 50%; /* Center caption horizontally */
+    transform: translate(-50%, -50%); /* Exact centering */
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark background for text readability */
+    color: white;
+    text-align: center; /* Center the text */
+    box-sizing: border-box;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 991px) {
     .hero-section {
-        height: 60vh; /* Reduced height for smaller screens */
+        height: 70vh; /* Keep height consistent for smaller screens */
     }
 
     .carousel-caption {
-        left: 8%; /* Adjusted left position */
-        padding: 30px 15px; /* Reduced padding */
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        padding: 20px; /* Adjust padding */
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Vertically center text */
+        align-items: center; /* Horizontally center text */
     }
 
     .carousel-caption h2 {
-        font-size: 2.5rem; /* Adjust text size */
+        font-size: 2.5rem;
     }
 
     .carousel-caption p {
-        font-size: 1.25rem; /* Smaller text for smaller screens */
+        font-size: 1.25rem;
     }
 }
 
 @media (max-width: 768px) {
     .hero-section {
-        height: 50vh; /* Reduced height on mobile */
+        height: 60vh; /* Adjusted height for smaller screens */
     }
 
     .carousel-caption {
-        left: 10%; /* Further adjustment for smaller screens */
-        padding: 20px 10px; /* Compact padding for mobile */
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        padding: 15px 8px;
+        background-color: rgba(0, 0, 0, 0.6); /* Slightly darker background */
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Vertically center text */
+        align-items: center; /* Horizontally center text */
     }
 
     .carousel-caption h2 {
-        font-size: 2rem; /* Further reduced text size */
+        font-size: 2rem;
     }
 
     .carousel-caption p {
-        font-size: 1rem; /* Compact size for smaller screens */
+        font-size: 1rem;
     }
 }
 
 @media (max-width: 576px) {
     .hero-section {
-        height: 45vh; /* Ensure height fits mobile */
+        height: 50vh; /* Adjusted height for mobile */
     }
 
     .carousel-caption {
-        left: 8%; /* Ensure text fits mobile view */
-        padding: 15px 8px; /* Reduced padding for very small screens */
-        max-width: 90%; /* Ensure text background doesn't overflow */
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        padding: 10px 5px;
+        background-color: rgba(0, 0, 0, 0.7); /* Darker background */
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Vertically center text */
+        align-items: center; /* Horizontally center text */
     }
 
     .carousel-caption h2 {
-        font-size: 1.75rem; /* Smaller heading size */
+        font-size: 1.75rem;
     }
 
     .carousel-caption p {
-        font-size: 0.9rem; /* Smaller paragraph size */
+        font-size: 0.9rem;
     }
 }
+
 #myBtn {
     display: none;
     position: fixed;
