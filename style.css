@@ -128,24 +128,25 @@
     object-fit: cover; /* Maintain aspect ratio without cutting */
 }
 
+/* Default caption behavior */
 .carousel-caption {
     position: absolute;
     top: 0; /* Position at the top */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Adjust for perfect centering */
-    padding: 40px 30px; /* Increased padding for height */
-    background-color: rgba(0, 0, 0, 0.7); /* Darker background for readability */
-    border-radius: 10px; /* Smooth rounded corners */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow */
-    max-width: 800px; /* Limit width for readability */
-    width: auto; /* Dynamically adjust to fit content */
-    min-height: 230px; /* Ensures background is tall enough for content */
-    display: flex;
+    left: 0; /* Start from the left */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark background for readability */
+    color: white;
+    display: flex; /* Flexbox for centering */
     flex-direction: column; /* Arrange text vertically */
     justify-content: center; /* Center text vertically */
-    text-align: center; /* Center text horizontally */
+    align-items: center; /* Center text horizontally */
+    text-align: center; /* Center the text */
+    box-sizing: border-box;
 }
 
+/* Headings and Paragraph styles inside the caption */
 .carousel-caption h2 {
     font-size: 3rem; /* Prominent text size */
     font-weight: 900; /* Very bold */
@@ -158,47 +159,15 @@
     margin: 10px 0 0; /* Spacing below heading */
 }
 
-/* Hero Section Styles */
-.hero-section {
-    position: relative;
-    width: 100%;
-    height: 70vh; /* Default height */
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Center content */
-    background-size: cover;
-    background-position: center;
-    overflow: hidden;
-}
-
-/* Default caption behavior */
-.carousel-caption {
-    position: absolute;
-    top: 50%; /* Center caption vertically */
-    left: 50%; /* Center caption horizontally */
-    transform: translate(-50%, -50%); /* Exact centering */
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.5); /* Dark background for text readability */
-    color: white;
-    text-align: center; /* Center the text */
-    box-sizing: border-box;
-}
-
 /* Responsive Adjustments */
 @media (max-width: 991px) {
     .hero-section {
-        height: 70vh; /* Keep height consistent for smaller screens */
+        height: 70vh; /* Consistent height for medium screens */
     }
 
     .carousel-caption {
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        padding: 20px; /* Adjust padding */
-        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-        display: flex;
-        flex-direction: column;
-        justify-content: center; /* Vertically center text */
-        align-items: center; /* Horizontally center text */
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.6); /* Adjusted background opacity */
     }
 
     .carousel-caption h2 {
@@ -212,18 +181,12 @@
 
 @media (max-width: 768px) {
     .hero-section {
-        height: 60vh; /* Adjusted height for smaller screens */
+        height: 60vh; /* Smaller height for tablets */
     }
 
     .carousel-caption {
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        padding: 15px 8px;
-        background-color: rgba(0, 0, 0, 0.6); /* Slightly darker background */
-        display: flex;
-        flex-direction: column;
-        justify-content: center; /* Vertically center text */
-        align-items: center; /* Horizontally center text */
+        padding: 15px;
+        background-color: rgba(0, 0, 0, 0.7); /* Slightly darker background for tablets */
     }
 
     .carousel-caption h2 {
@@ -237,18 +200,12 @@
 
 @media (max-width: 576px) {
     .hero-section {
-        height: 50vh; /* Adjusted height for mobile */
+        height: 50vh; /* Reduced height for mobile */
     }
 
     .carousel-caption {
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        padding: 10px 5px;
-        background-color: rgba(0, 0, 0, 0.7); /* Darker background */
-        display: flex;
-        flex-direction: column;
-        justify-content: center; /* Vertically center text */
-        align-items: center; /* Horizontally center text */
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.8); /* Darker background for mobile */
     }
 
     .carousel-caption h2 {
