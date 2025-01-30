@@ -192,6 +192,14 @@
     font-weight: 700; /* Bold text */
     margin: 10px 0 0; /* Spacing below heading */
 }
+/* Ensure images are centered but not cropped from the top */
+img.rounded-circle {
+    width: 150px;  /* Set a fixed width for all images */
+    height: 150px;  /* Set a fixed height for all images */
+    object-fit: cover;  /* Ensure the images are cropped to fill the circle */
+    object-position: top;  /* Align the top of the image with the circle's top edge */
+    margin-bottom: 10px;  /* Add space below images */
+}
 
 /* Responsive Adjustments */
 @media (max-width: 991px) {
