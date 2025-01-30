@@ -29,29 +29,42 @@
     }, 8000); // Match animation duration
 });
 
-// Navbar toggler and cancel button functionality
-const toggler = document.getElementById("navbar-toggler");
-const cancel = document.getElementById("navbar-cancel");
-const navbarNav = document.getElementById("navbarNav");
-const navLinks = document.querySelectorAll(".nav-link"); // Select all navbar links
+document.addEventListener('DOMContentLoaded', () => {
+    const toggler = document.getElementById("navbar-toggler");
+    const cancel = document.getElementById("navbar-cancel");
+    const navbarNav = document.getElementById("navbarNav");
+    const navLinks = document.querySelectorAll(".nav-link");
+    const dropdownToggle = document.getElementById("aboutDropdown");
+    const dropdownMenu = dropdownToggle.nextElementSibling;
 
-toggler.addEventListener("click", function () {
-    toggler.style.display = "none"; 
-    cancel.style.display = "block"; 
-});
+    // Navbar toggler functionality
+    toggler.addEventListener("click", function () {
+        toggler.style.display = "none";
+        cancel.style.display = "block";
+    });
 
-cancel.addEventListener("click", function () {
-    toggler.style.display = "block"; 
-    cancel.style.display = "none"; 
-    navbarNav.classList.remove("show"); // Collapse the navbar
-});
+    cancel.addEventListener("click", function () {
+        toggler.style.display = "block";
+        cancel.style.display = "none";
+        navbarNav.classList.remove("show");
+    });
 
-// Close the navbar when a nav-link is clicked (on mobile)
-navLinks.forEach(link => {
-    link.addEventListener("click", function () {
-        toggler.style.display = "block"; // Show toggler
-        cancel.style.display = "none"; // Hide cancel button
-        navbarNav.classList.remove("show"); // Collapse the navbar
+    // Close navbar when a nav-link is clicked (Mobile)
+    navLinks.forEach(link => {
+        link.addEventListener("click", function () {
+            toggler.style.display = "block";
+            cancel.style.display = "none";
+            navbarNav.classList.remove("show");
+        });
+    });
+
+    // Close navbar when a dropdown item is clicked (Mobile)
+    document.querySelectorAll(".dropdown-item").forEach(item => {
+        item.addEventListener("click", function () {
+            toggler.style.display = "block"; // Show toggler
+            cancel.style.display = "none"; // Hide cancel button
+            navbarNav.classList.remove("show"); // Collapse navbar
+        });
     });
 });
 

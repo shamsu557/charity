@@ -17,25 +17,33 @@
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container">
         <a class="navbar-brand" href="#">Sekure Foundation</a>
-        <!-- Navbar Toggler Button (visible by default) -->
+
+        <!-- Navbar Toggler -->
         <button class="navbar-toggler" id="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <!-- Cancel Button (hidden by default) -->
         <button class="navbar-cancel d-lg-none" id="navbar-cancel" type="button" style="display: none;">
-            <span>&times;</span> <!-- Times symbol for cancel -->
+            <span>&times;</span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#who-we-are">Who We Are</a></li>
-                <li class="nav-item"><a class="nav-link" href="#founder">Founder</a></li>
-                <li class="nav-item"><a class="nav-link" href="#board">Board of Trustees</a></li>
-                <li class="nav-item"><a class="nav-link" href="#team">Our Team</a></li>
+
+                <!-- About Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button">
+                        About
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#who-we-are">Who We Are</a></li>
+                        <li><a class="dropdown-item" href="#founder">Founder</a></li>
+                        <li><a class="dropdown-item" href="#board">Board of Trustees</a></li>
+                        <li><a class="dropdown-item" href="#team">Our Team</a></li>
+                    </ul>
+                </li>
                 <li class="nav-item"><a class="nav-link" href="#news">News and Events</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                <!-- Donate Button -->
                 <li class="nav-item">
                     <a class="btn btn-success text-white" href="#" role="button">Donate</a>
                 </li>
@@ -43,6 +51,7 @@
         </div>
     </div>
 </nav>
+
 <!-- Hero Section -->
 <section class="hero-section mt-3">
     <div class="carousel-items">

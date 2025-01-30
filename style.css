@@ -19,13 +19,13 @@
 }
 
 .nav-link {
-    color: #060607 !important;
+    color: #0b0b0c !important;
     font-size: 16px;
 }
 
 .nav-link:hover {
     color: #d7cfcf !important; /* Dark text color */
-    background-color: #847e7e; /* Light background color */
+    background-color: #fffefe; /* Light background color */
 }
 
 .navbar-toggler {
@@ -72,11 +72,33 @@
     color: black;
 }
 
+/* Show dropdown on hover for large screens */
+@media (min-width: 992px) {
+    .navbar .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+    .navbar .dropdown-menu {
+        margin-top: 0;
+    }
+}
+
+/* Ensure dropdown is visible when clicked on small screens */
+@media (max-width: 991px) {
+    .navbar .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+    .navbar .dropdown-menu {
+        margin-top: 0;
+    }
+}
+
 
 @media (max-width: 768px) {
-    .navbar-collapse {
-        background-color: #d3d7db; /* Match navbar background */
-        padding: 15px;
+    .navbar .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+    .navbar .dropdown-menu {
+        margin-top: 0;
     }
 
     .nav-link {
@@ -162,12 +184,12 @@
 /* Responsive Adjustments */
 @media (max-width: 991px) {
     .hero-section {
-        height: 70vh; /* Consistent height for medium screens */
+        height: 70vh;
     }
 
     .carousel-caption {
         padding: 20px;
-        background-color: rgba(0, 0, 0, 0.6); /* Adjusted background opacity */
+        background-color: rgba(0, 0, 0, 0.5); /* Reduced opacity to make image clearer */
     }
 
     .carousel-caption h2 {
@@ -181,12 +203,12 @@
 
 @media (max-width: 768px) {
     .hero-section {
-        height: 60vh; /* Smaller height for tablets */
+        height: 60vh;
     }
 
     .carousel-caption {
         padding: 15px;
-        background-color: rgba(0, 0, 0, 0.7); /* Slightly darker background for tablets */
+        background-color: rgba(0, 0, 0, 0.4); /* Even lower opacity for better image visibility */
     }
 
     .carousel-caption h2 {
@@ -200,12 +222,12 @@
 
 @media (max-width: 576px) {
     .hero-section {
-        height: 50vh; /* Reduced height for mobile */
+        height: 50vh;
     }
 
     .carousel-caption {
         padding: 10px;
-        background-color: rgba(0, 0, 0, 0.8); /* Darker background for mobile */
+        background-color: rgba(0, 0, 0, 0.3); /* Very light background, making image more visible */
     }
 
     .carousel-caption h2 {
@@ -216,6 +238,7 @@
         font-size: 0.9rem;
     }
 }
+
 
 #myBtn {
     display: none;
