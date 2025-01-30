@@ -81,6 +81,53 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+
+document.addEventListener("DOMContentLoaded", function () {
+    const contactForm = document.getElementById("contactForm");
+
+    // Handle form submission
+    contactForm.addEventListener("submit", async (event) => {
+        event.preventDefault(); // Prevent default form submission behavior
+
+        // Extract form data
+        const formData = {
+            name: document.getElementById("name").value.trim(),
+            email: document.getElementById("email").value.trim(),
+            message: document.getElementById("message").value.trim(),
+        };
+
+        // Validate form fields
+        if (!formData.name || !formData.email || !formData.message) {
+            alert("Please fill out all fields before submitting the form.");
+            return;
+        }
+
+        try {
+            // Submit form data to the server using Fetch API
+            const response = await fetch("/send-message", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
+
+            // Process response
+            const result = await response.json();
+            if (response.ok) {
+                alert(result.message || "Your message has been sent successfully!");
+                contactForm.reset(); // Clear the form
+            } else {
+                alert(result.error || "Failed to send your message. Please try again later.");
+            }
+        } catch (error) {
+            console.error("Error submitting the form:", error);
+            alert("An error occurred while sending your message. Please try again later.");
+        }
+    });
+});
+
+
 // Back to top button functionality
 window.onscroll = function () {
         scrollFunction();
