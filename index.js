@@ -31,30 +31,30 @@
 
 // Navbar toggler and cancel button functionality
 const toggler = document.getElementById("navbar-toggler");
-    const cancel = document.getElementById("navbar-cancel");
-    const navbarNav = document.getElementById("navbarNav");
+const cancel = document.getElementById("navbar-cancel");
+const navbarNav = document.getElementById("navbarNav");
+const navLinks = document.querySelectorAll(".nav-link"); // Select all navbar links
 
-    toggler.addEventListener("click", function () {
-        // Hide toggler and show cancel button
-        toggler.style.display = "none";
-        cancel.style.display = "block";
-    });
+toggler.addEventListener("click", function () {
+    toggler.style.display = "none"; 
+    cancel.style.display = "block"; 
+});
 
-    cancel.addEventListener("click", function () {
-        // Hide cancel button and show toggler
-        toggler.style.display = "block";
-        cancel.style.display = "none";
+cancel.addEventListener("click", function () {
+    toggler.style.display = "block"; 
+    cancel.style.display = "none"; 
+    navbarNav.classList.remove("show"); // Collapse the navbar
+});
+
+// Close the navbar when a nav-link is clicked (on mobile)
+navLinks.forEach(link => {
+    link.addEventListener("click", function () {
+        toggler.style.display = "block"; // Show toggler
+        cancel.style.display = "none"; // Hide cancel button
         navbarNav.classList.remove("show"); // Collapse the navbar
     });
+});
 
-    // Close the navbar when a nav-link is clicked (on mobile)
-    navLinks.forEach(link => {
-        link.addEventListener("click", function () {
-            toggler.style.display = "block"; // Show toggler
-            cancel.style.display = "none"; // Hide cancel button
-            navbarNav.classList.remove("show"); // Collapse the navbar
-        });
-    });
 // Back to top button functionality
 window.onscroll = function () {
         scrollFunction();
