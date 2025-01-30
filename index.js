@@ -35,47 +35,51 @@ document.addEventListener('DOMContentLoaded', () => {
     const navbarNav = document.getElementById("navbarNav");
     const navLinks = document.querySelectorAll(".nav-link");
     const dropdownToggle = document.getElementById("aboutDropdown");
-    const dropdownMenu = dropdownToggle.nextElementSibling; // Get the dropdown menu
+    const dropdownMenu = dropdownToggle ? dropdownToggle.nextElementSibling : null; // Ensure dropdown exists
 
-    // Navbar toggler functionality
+    // Navbar toggler and cancel button functionality
     toggler.addEventListener("click", function () {
-        toggler.style.display = "none";
-        cancel.style.display = "block";
+        toggler.style.display = "none"; // Hide toggler
+        cancel.style.display = "block"; // Show cancel button
+        navbarNav.classList.add("show"); // Open the navbar
     });
 
     cancel.addEventListener("click", function () {
-        toggler.style.display = "block";
-        cancel.style.display = "none";
-        navbarNav.classList.remove("show");
+        toggler.style.display = "block"; // Show toggler
+        cancel.style.display = "none"; // Hide cancel button
+        navbarNav.classList.remove("show"); // Collapse the navbar
     });
 
-    // Close navbar when a nav-link is clicked (Mobile)
+    // Close navbar when a nav-link is clicked (on mobile)
     navLinks.forEach(link => {
         link.addEventListener("click", function () {
-            toggler.style.display = "block";
-            cancel.style.display = "none";
-            navbarNav.classList.remove("show");
+            toggler.style.display = "block"; // Show toggler
+            cancel.style.display = "none"; // Hide cancel button
+            navbarNav.classList.remove("show"); // Collapse the navbar
         });
     });
 
-    // Show dropdown items on hover (Large screens)
-    dropdownToggle.addEventListener("mouseenter", function () {
-        const allItems = dropdownMenu.querySelectorAll(".dropdown-item");
-        allItems.forEach(dropdownItem => {
-            dropdownItem.style.display = "block"; // Show dropdown items on hover
-        });
-    });
-
-    // Hide dropdown items on click of a dropdown item
-    document.querySelectorAll(".dropdown-item").forEach(item => {
-        item.addEventListener("click", function () {
+    // Dropdown functionality for large screens (hover)
+    if (dropdownToggle) {
+        dropdownToggle.addEventListener("mouseenter", function () {
             const allItems = dropdownMenu.querySelectorAll(".dropdown-item");
             allItems.forEach(dropdownItem => {
-                dropdownItem.style.display = "none"; // Hide dropdown items when clicked
+                dropdownItem.style.display = "block"; // Show dropdown items on hover
             });
         });
-    });
+
+        // Hide dropdown items when clicked on a dropdown item
+        document.querySelectorAll(".dropdown-item").forEach(item => {
+            item.addEventListener("click", function () {
+                const allItems = dropdownMenu.querySelectorAll(".dropdown-item");
+                allItems.forEach(dropdownItem => {
+                    dropdownItem.style.display = "none"; // Hide dropdown items when clicked
+                });
+            });
+        });
+    }
 });
+
 
 // Back to top button functionality
 window.onscroll = function () {
