@@ -1,4 +1,4 @@
- document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     const items = document.querySelectorAll('.carousel-item');
     const heroSection = document.querySelector('.hero-section');
     const captions = document.createElement('div');
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navbarNav = document.getElementById("navbarNav");
     const navLinks = document.querySelectorAll(".nav-link");
     const dropdownToggle = document.getElementById("aboutDropdown");
-    const dropdownMenu = dropdownToggle.nextElementSibling;
+    const dropdownMenu = dropdownToggle.nextElementSibling; // Get the dropdown menu
 
     // Navbar toggler functionality
     toggler.addEventListener("click", function () {
@@ -58,12 +58,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Close navbar when a dropdown item is clicked (Mobile)
+    // Show dropdown items on hover (Large screens)
+    dropdownToggle.addEventListener("mouseenter", function () {
+        const allItems = dropdownMenu.querySelectorAll(".dropdown-item");
+        allItems.forEach(dropdownItem => {
+            dropdownItem.style.display = "block"; // Show dropdown items on hover
+        });
+    });
+
+    // Hide dropdown items on click of a dropdown item
     document.querySelectorAll(".dropdown-item").forEach(item => {
         item.addEventListener("click", function () {
-            toggler.style.display = "block"; // Show toggler
-            cancel.style.display = "none"; // Hide cancel button
-            navbarNav.classList.remove("show"); // Collapse navbar
+            const allItems = dropdownMenu.querySelectorAll(".dropdown-item");
+            allItems.forEach(dropdownItem => {
+                dropdownItem.style.display = "none"; // Hide dropdown items when clicked
+            });
         });
     });
 });
