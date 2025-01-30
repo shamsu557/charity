@@ -82,7 +82,7 @@
     }
 }
 
-/* Ensure dropdown is visible when clicked on small screens */
+/* Ensure dropdown is visible on hover for small screens */
 @media (max-width: 991px) {
     .navbar .dropdown:hover .dropdown-menu {
         display: block;
@@ -92,13 +92,21 @@
     }
 }
 
-
+/* Ensure dropdown is visible when hovered on mobile screens */
 @media (max-width: 768px) {
     .navbar .dropdown:hover .dropdown-menu {
         display: block;
+        position: absolute;
+        left: 0;
+        right: 0;
+        background-color: white; /* Ensure dropdown is visible */
+        z-index: 1000;
     }
+
     .navbar .dropdown-menu {
         margin-top: 0;
+        width: 100%; /* Full width */
+        text-align: center; /* Center dropdown items */
     }
 
     .nav-link {
@@ -108,6 +116,10 @@
         font-size: 1rem;
     }
 
+    /* Hide caret from dropdown */
+    .navbar .dropdown-toggle::after {
+        display: none;
+    }
 
     .navbar-cancel {
         display: none;
@@ -127,7 +139,7 @@
     }
 
     .navbar-nav .btn.btn-success {
-        margin-top: 10px; /* Add some spacing above the donate button */
+        margin-top: 10px;
     }
 }
 
