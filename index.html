@@ -115,13 +115,54 @@
             <button type="submit" class="btn btn-success">Submit</button>
         </form>
     </div>
-    
+
     <!-- Donate Column -->
     <div class="col-lg-6 mb-4">
         <h2 class="text-white text-center bg-dark">Donate</h2>
         <p class="text-center">Your generous donations help us support orphans, widows, divorced women, and underprivileged youth in our community. Please consider making a contribution to help us continue our mission.</p>
         <div class="text-center">
-            <a href="#" class="btn btn-success">Donate Now</a>
+            <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#donateModal">Donate Now</a>
+        </div>
+    </div>
+</div>
+
+<!-- Donation Modal -->
+<div class="modal fade" id="donateModal" tabindex="-1" aria-labelledby="donateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="donateModalLabel">Make a Donation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="donationForm">
+                    <div class="mb-3">
+                        <label for="donorName" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="donorName" name="donorName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="donorEmail" class="form-label">Email (Optional)</label>
+                        <input type="email" class="form-control" id="donorEmail" name="donorEmail">
+                    </div>
+                    <div class="mb-3">
+                        <label for="donorPhone" class="form-label">Phone Number (Optional)</label>
+                        <input type="text" class="form-control" id="donorPhone" name="donorPhone">
+                    </div>
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Amount (NGN)</label>
+                        <input type="number" class="form-control" id="amount" name="amount" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="country" class="form-label">Country</label>
+                        <input type="text" class="form-control" id="country" name="country" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="state" class="form-label">State</label>
+                        <input type="text" class="form-control" id="state" name="state" required>
+                    </div>
+                    <button type="button" class="btn btn-success" onclick="initiatePayment()">Donate</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -172,6 +213,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+<script src="https://js.paystack.co/v1/inline.js"></script>
 <script src="index.js"></script>
 </body>
 </html>

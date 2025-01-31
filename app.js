@@ -114,6 +114,30 @@ Message: ${message}`,
     return res.status(200).json({ message: "Your message has been sent successfully!" });
   });
 });
+app.post("/donate", (req, res) => {
+  const { donorName, donorEmail, donorPhone, amount, country, state, reference } = req.body;
+
+  // Ensure required fields are present (donorEmail and donorPhone are optional)
+  if (!donorName || !amount || !country || !state || !reference) {
+      return res.status(400).json({ message: "All required fields must be filled." });
+  }
+
+  // Use NULL if donorEmail or donorPhone are missing
+  const emailToStore = donorEmail && donorEmail.trim() !== "" ? donorEmail : null;
+  const phoneToStore = donorPhone && donorPhone.trim() !== "" ? donorPhone : null;
+
+  const query = `
+    INSERT INTO donations (donor_name, donor_email, donor_phone, amount, country, state, reference, date_time)
+    VALUES (?, ?, ?, ?, ?, ?, ?, NOW())`;
+
+  db.query(query, [donorName, emailToStore, phoneToStore, amount, country, state, reference], (err, result) => {
+      if (err) {
+          console.error("Error inserting donation:", err);
+          return res.status(500).json({ message: "Donation processing failed. Please try again." });
+      }
+      res.status(200).json({ message: "Donation successful. Thank you for your generosity!" });
+  });
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

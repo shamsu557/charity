@@ -127,6 +127,65 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+// Donate modal functions
+function openDonationModal() {
+    document.getElementById('donationModal').style.display = 'block';
+}
+
+function closeDonationModal() {
+    document.getElementById('donationModal').style.display = 'none';
+}
+
+function initiatePayment() {
+    const donorName = document.getElementById("donorName").value;
+    const donorEmail = document.getElementById("donorEmail").value.trim(); // Email is optional
+    const donorPhone = document.getElementById("donorPhone").value.trim(); // Phone number is optional
+    const amount = document.getElementById("amount").value * 100;
+    const country = document.getElementById("country").value;
+    const state = document.getElementById("state").value;
+
+    // Ensure required fields are filled
+    if (!donorName || !amount || !country || !state) {
+        alert("Please fill all required fields before proceeding.");
+        return;
+    }
+
+    // Use a default email if none is provided (Paystack requires an email)
+    const emailToUse = donorEmail || `donor_${Date.now()}@example.com`;
+
+    let handler = PaystackPop.setup({
+        key: 'pk_live_e6942e61f70c87019cbeb64ffed04e10fbd2ee10', // Replace with your public key
+        email: emailToUse,
+        amount: amount,
+        ref: '' + Math.floor((Math.random() * 1000000000) + 1),
+        onClose: function() {
+            alert('Transaction window closed.');
+        },
+        callback: function(response) {
+            // Send data to the backend
+            fetch("/donate", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    donorName,
+                    donorEmail, // Can be empty
+                    donorPhone, // Can be empty
+                    amount: amount / 100, // Convert back to NGN
+                    country,
+                    state,
+                    reference: response.reference
+                })
+            }).then(res => res.json()).then(data => {
+                alert(data.message);
+            }).catch(error => {
+                console.error("Error:", error);
+                alert("Something went wrong. Please try again.");
+            });
+        }
+    });
+
+    handler.openIframe();
+}
 
 // Back to top button functionality
 window.onscroll = function () {
