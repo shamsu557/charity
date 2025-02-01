@@ -31,7 +31,7 @@
                 <li class="nav-item"><a class="nav-link" href="#news">News and Events</a></li>
                 <!-- Donate Button -->
                 <li class="nav-item">
-                    <a class="btn btn-success text-white" href="#" role="button">Donate</a>
+                    <a class="btn btn-success text-white" href="#donate" role="button">Donate</a>
                 </li>
             </ul>
         </div>
@@ -74,27 +74,80 @@
                 </div>
             </div>
 
-            <!-- Contact Form Section -->
-            <div class="col-lg-6">
-                <h2 class="text-white text-center bg-dark">Get in Touch</h2>
-                <form id="contactForm" method="POST" action="/send-message">
+     <!-- Contact Form Section -->
+<div class="col-lg-6">
+    <h2 class="text-white text-center bg-dark py-2">Get in Touch</h2>
+    <form id="contactForm" method="POST" action="/send-message">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Your Full Name" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
+        </div>
+        <div class="mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea class="form-control" id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+        </div>
+        <!-- Centered Submit Button -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+    </form>
+</div>
+
+    <!-- Donate Container (Centered) -->
+<div class="container d-flex justify-content-center mt-4" >
+    <div class="col-lg-6 col-md-8 col-sm-10 text-center" id="donate" >
+        <h2 class="text-white text-center bg-dark py-1">Donate</h2>
+        <p>Your generous donations help us support orphans, widows, divorced women, and underprivileged youth in our community. Please consider making a contribution to help us continue our mission.</p>
+        <div>
+            <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#donateModal">Donate Now</a>
+        </div>
+    </div>
+</div>
+
+<!-- Donation Modal -->
+<div class="modal fade" id="donateModal" tabindex="-1" aria-labelledby="donateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="donateModalLabel">Make a Donation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="donationForm">
                     <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Your Full Name" required>
+                        <label for="donorName" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="donorName" name="donorName" required>
                     </div>
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
+                        <label for="donorEmail" class="form-label">Email (Optional)</label>
+                        <input type="email" class="form-control" id="donorEmail" name="donorEmail">
                     </div>
                     <div class="mb-3">
-                        <label for="message" class="form-label">Message</label>
-                        <textarea class="form-control" id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+                        <label for="donorPhone" class="form-label">Phone Number (Optional)</label>
+                        <input type="text" class="form-control" id="donorPhone" name="donorPhone">
                     </div>
-                    <button type="submit" class="btn btn-success">Submit</button>
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Amount (NGN)</label>
+                        <input type="number" class="form-control" id="amount" name="amount" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="country" class="form-label">Country</label>
+                        <input type="text" class="form-control" id="country" name="country" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="state" class="form-label">State</label>
+                        <input type="text" class="form-control" id="state" name="state" required>
+                    </div>
+                    <button type="button" class="btn btn-success" onclick="initiatePayment()">Donate</button>
                 </form>
             </div>
         </div>
     </div>
+</div>
 
   <!-- Footer -->
  <div class="footer bg-light mt-5">

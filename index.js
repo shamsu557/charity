@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cancel = document.getElementById("navbar-cancel");
     const navbarNav = document.getElementById("navbarNav");
     const navLinks = document.querySelectorAll(".nav-link");
+    const donateButton = document.querySelector(".btn-success"); // Select Donate button
     const dropdownToggle = document.getElementById("aboutDropdown");
     const dropdownMenu = dropdownToggle ? dropdownToggle.nextElementSibling : null; // Ensure dropdown exists
 
@@ -50,9 +51,9 @@ document.addEventListener('DOMContentLoaded', () => {
         navbarNav.classList.remove("show"); // Collapse the navbar
     });
 
-    // Close navbar when a nav-link is clicked (on mobile)
-    navLinks.forEach(link => {
-        link.addEventListener("click", function () {
+    // Close navbar when a nav-link OR donate button is clicked (on mobile)
+    [...navLinks, donateButton].forEach(element => {
+        element.addEventListener("click", function () {
             toggler.style.display = "block"; // Show toggler
             cancel.style.display = "none"; // Hide cancel button
             navbarNav.classList.remove("show"); // Collapse the navbar
@@ -79,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
 
 
 

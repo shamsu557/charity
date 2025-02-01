@@ -65,7 +65,7 @@
                 <li class="nav-item"><a class="nav-link" href="#news">News and Events</a></li>
                 <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                 <li class="nav-item">
-                    <a class="btn btn-success text-white" href="#" role="button">Donate</a>
+                    <a class="btn btn-success text-white" href="#donate" role="button">Donate</a>
                 </li>
             </ul>
         </div>
@@ -83,9 +83,9 @@
         </div>    
 </section>
    <!-- Who We Are -->
-<section id="who-we-are" class="container text-center mt-5">
-    <h2>Who We Are</h2>
-    <p>Sekure Foundation is dedicated to creating sustainable social impact through initiatives aimed at feeding orphanages, eradicating poverty through empowerment programs, and assisting underprivileged individuals in achieving social integration and personal growth.</p>
+<section id="who-we-are" class="container text-center mt-5 ">
+    <h2 class="text-white text-center bg-dark py-1">Who We Are</h2>
+     <p>Sekure Foundation is dedicated to creating sustainable social impact through initiatives aimed at feeding orphanages, eradicating poverty through empowerment programs, and assisting underprivileged individuals in achieving social integration and personal growth.</p>
 
     <h3 class="mt-4">Sekure Foundation has the following tier programs:</h3>
 
@@ -111,8 +111,8 @@
 
 
 <!-- Founder -->
-<section id="founder" class="container text-center mt-5">
-    <h2>About the Founder</h2>
+<section id="founder" class="container text-center mt-5 bg-light">
+    <h2 class="text-white text-center bg-dark py-1">About the Founder</h2>
     <img src="founder.jpg" alt="Founder Image" class="img-fluid rounded-image" style="width: 200px; height: 200px;">
     <p class="mt-3"><strong>[Founder Name]</strong> is the visionary behind the SEKURE FOUNDATION. With a deep-rooted passion for social justice and a commitment to improving the lives of underserved communities, [Founder Name] has dedicated their life to empowering those in need.</p>
 
@@ -126,7 +126,7 @@
 </section>
 <!-- Board of Trustees -->
 <section id="board" class="container text-center mt-5">
-    <h2>Board of Trustees</h2>
+    <h2 class="text-white text-center bg-dark py-1">Board of Trustees</h2>
     <div class="row">
         <div class="col-md-4">
             <img src="former.jpeg" class="img-fluid rounded-circle" alt="Trustee 1">
@@ -147,8 +147,8 @@
 </section>
 
 <!-- Our Team -->
-<section id="team" class="container text-center mt-5">
-    <h2>Our Team</h2>
+<section id="team" class="container text-center mt-5 bg-light">
+    <h2 class="text-white text-center bg-dark py-1">Our Team</h2>
     <div class="row">
         <div class="col-md-4">
             <img src="shamsu.jpg" class="img-fluid rounded-circle" alt="Team Member 1">
@@ -167,6 +167,57 @@
         </div>
     </div>
 </section>
+<!-- Donate Container (Centered) -->
+<div class="container d-flex justify-content-center mt-4" >
+    <div class="col-lg-6 col-md-8 col-sm-10 text-center" id="donate" >
+        <h2 class="text-white text-center bg-dark py-1">Donate</h2>
+        <p>Your generous donations help us support orphans, widows, divorced women, and underprivileged youth in our community. Please consider making a contribution to help us continue our mission.</p>
+        <div>
+            <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#donateModal">Donate Now</a>
+        </div>
+    </div>
+</div>
+
+<!-- Donation Modal -->
+<div class="modal fade" id="donateModal" tabindex="-1" aria-labelledby="donateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="donateModalLabel">Make a Donation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="donationForm">
+                    <div class="mb-3">
+                        <label for="donorName" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="donorName" name="donorName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="donorEmail" class="form-label">Email (Optional)</label>
+                        <input type="email" class="form-control" id="donorEmail" name="donorEmail">
+                    </div>
+                    <div class="mb-3">
+                        <label for="donorPhone" class="form-label">Phone Number (Optional)</label>
+                        <input type="text" class="form-control" id="donorPhone" name="donorPhone">
+                    </div>
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Amount (NGN)</label>
+                        <input type="number" class="form-control" id="amount" name="amount" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="country" class="form-label">Country</label>
+                        <input type="text" class="form-control" id="country" name="country" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="state" class="form-label">State</label>
+                        <input type="text" class="form-control" id="state" name="state" required>
+                    </div>
+                    <button type="button" class="btn btn-success" onclick="initiatePayment()">Donate</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
   <!-- Footer -->
   <div class="footer bg-light mt-5">
