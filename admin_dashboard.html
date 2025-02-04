@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">Admin Dashboard</span>
+            <button class="btn btn-danger" id="logoutBtn">Logout</button>
+        </div>
+    </nav>
+    
+    <div class="container mt-4">
+        <h2>Donation Reports</h2>
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <input type="date" id="startDate" class="form-control" placeholder="Start Date">
+            </div>
+            <div class="col-md-3">
+                <input type="date" id="endDate" class="form-control" placeholder="End Date">
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-primary" id="fetchReport">Fetch Report</button>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-success" id="downloadReport">Download Report</button>
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th onclick="sortTable('donor_name')">Donor Name</th>
+                    <th onclick="sortTable('date_time')">Date</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody id="reportTable">
+                <!-- Donation reports will be inserted here dynamically -->
+            </tbody>
+        </table>
+    </div>
+    
+    <script>
+        // Check if the user is logged in as Admin
+        window.onload = async function() {
+            const response = await fetch("/check-admin-login");
+            if (!response.ok) {
+                window.location.href = "/admin_login.html"; // Redirect to login if not authenticated
+            }
+        };
+
+        document.getElementById("logoutBtn").addEventListener("click", async function() {
+            const response = await fetch("/adminLogout", { method: "POST" });
+            if (response.ok) {
+                window.location.href = "/admin_login.html";
+            }
+        });
+
+        document.getElementById("fetchReport").addEventListener("click", async function() {
+            const startDate = document.getElementById("startDate").value;
+            const endDate = document.getElementById("endDate").value;
+            
+            const response = await fetch(`/fetch-donations?start=${startDate}&end=${endDate}`);
+            const data = await response.json();
+            
+            let tableRows = "";
+            data.forEach(donation => {
+                tableRows += `<tr>
+                    <td>${donation.donor_name}</td>
+                    <td>${donation.date_time}</td>
+                    <td>${donation.amount}</td>
+                </tr>`;
+            });
+            document.getElementById("reportTable").innerHTML = tableRows;
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

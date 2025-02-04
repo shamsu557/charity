@@ -138,6 +138,81 @@ app.post("/donate", (req, res) => {
       res.status(200).json({ message: "Donation successful. Thank you for your generosity!" });
   });
 });
+// Admin login route
+app.post("/admin_login", (req, res) => {
+  const { username, password } = req.body;
+
+  // Check if the username and password are correct
+  if (username === 'Admin' && password === 'Admin') {
+      req.session.isAdminLoggedIn = true;
+      return res.status(200).send('Logged in');
+  } else {
+      return res.status(401).send('Invalid credentials');
+  }
+});
+
+// Middleware to check if admin is logged in
+function authMiddleware(req, res, next) {
+  if (req.session.isAdminLoggedIn) {
+      return next();
+  }
+  return res.status(401).send('You must log in first');
+}
+
+// Admin dashboard route (Protected)
+app.get("/monitor", authMiddleware, (req, res) => {
+  res.sendFile(__dirname + '/admin_dashboard.html'); // Send the Admin Dashboard HTML
+});
+
+// Check if admin is logged in (for checking session state)
+app.get("/check-admin-login", (req, res) => {
+  if (req.session.isAdminLoggedIn) {
+      return res.status(200).send('Logged in');
+  }
+  return res.status(401).send('Not authenticated');
+});
+
+// Admin logout route
+app.post("/adminLogout", (req, res) => {
+  req.session.destroy((err) => {
+      if (err) {
+          return res.status(500).send('Logout failed');
+      }
+      return res.status(200).send('Logged out');
+  });
+});
+
+// Fetch Donations Report (Protected Route)
+app.get("/fetch-donations", authMiddleware, (req, res) => {
+  let { startDate, endDate, sortBy } = req.query;
+  let query = "SELECT * FROM donations WHERE 1";
+  let queryParams = [];
+
+  if (startDate && endDate) {
+      query += " AND date_time BETWEEN ? AND ?";
+      queryParams.push(startDate, endDate);
+  }
+  
+  if (sortBy) {
+      query += ` ORDER BY ${sortBy}`;
+  }
+
+  db.query(query, queryParams, (err, results) => {
+      if (err) {
+          console.error("Error fetching donations:", err);
+          return res.status(500).json({ message: "Error fetching donations" });
+      }
+      res.json(results);
+  });
+});
+
+// Admin Logout (Redirect to Login Page)
+app.get("/admin-logout", (req, res) => {
+  req.session.destroy(() => {
+      res.redirect("/admin_login.html");
+  });
+});
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
