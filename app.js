@@ -7,9 +7,9 @@ const db = require("./mysql"); // Ensure mysql.js is configured correctly
 const fs = require("fs");
 const multer = require("multer");
 const session = require("express-session");
+const PDFDocument = require('pdfkit');
 
 const app = express();
-const saltRounds = 10;
 
 app.use(
   session({
@@ -202,6 +202,33 @@ app.get("/fetch-donations", authMiddleware, (req, res) => {
           console.error("Error fetching donations:", err);
           return res.status(500).json({ message: "Error fetching donations" });
       }
+
+      // If "download" parameter is passed, generate and send the PDF
+      if (req.query.download === 'true') {
+          const doc = new PDFDocument();
+
+          res.setHeader('Content-Type', 'application/pdf');
+          res.setHeader('Content-Disposition', 'attachment; filename=donations-report.pdf');
+
+          doc.pipe(res); // Pipe the PDF output to the response stream
+
+          doc.fontSize(20).text('Donations Report', { align: 'center' });
+          doc.moveDown();
+
+          // Table header
+          doc.fontSize(12).text('Donor Name     Date          Amount');
+          doc.moveDown(0.5);
+
+          // Table rows
+          results.forEach(donation => {
+              doc.text(`${donation.donor_name}     ${donation.date_time}     ${donation.amount}`);
+          });
+
+          doc.end(); // Finish the PDF generation
+          return; // End the response
+      }
+
+      // Return data as JSON if not downloading
       res.json(results);
   });
 });
