@@ -77,6 +77,25 @@
             });
             document.getElementById("reportTable").innerHTML = tableRows;
         });
+
+        document.getElementById("downloadReport").addEventListener("click", async function() {
+            const startDate = document.getElementById("startDate").value;
+            const endDate = document.getElementById("endDate").value;
+
+            const response = await fetch(`/fetch-donations?start=${startDate}&end=${endDate}&download=true`);
+            
+            if (!response.ok) {
+                alert("Error generating the report!");
+                return;
+            }
+
+            // Create a link to trigger the download of the CSV file
+            const blob = await response.blob();
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "donations-report.csv";
+            link.click();
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
