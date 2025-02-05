@@ -186,7 +186,91 @@ function initiatePayment() {
 
     handler.openIframe();
 }
+        // Check if the user is logged in as Admin
+        window.onload = async function() {
+            const response = await fetch("/check-admin-login");
+            if (!response.ok) {
+                window.location.href = "/admin_login.html"; // Redirect to login if not authenticated
+            }
+        };
 
+        document.getElementById("logoutBtn").addEventListener("click", async function() {
+            const response = await fetch("/adminLogout", { method: "POST" });
+            if (response.ok) {
+                window.location.href = "/admin_login.html";
+            }
+        });
+
+        document.getElementById("fetchReport").addEventListener("click", async function() {
+            const startDate = document.getElementById("startDate").value;
+            const endDate = document.getElementById("endDate").value;
+            
+            const response = await fetch(`/fetch-donations?start=${startDate}&end=${endDate}`);
+            const data = await response.json();
+            
+            let tableRows = "";
+            data.forEach(donation => {
+                tableRows += `<tr>
+                    <td>${donation.donor_name}</td>
+                    <td>${donation.date_time}</td>
+                    <td>${donation.amount}</td>
+                </tr>`;
+            });
+            document.getElementById("reportTable").innerHTML = tableRows;
+        });
+
+        document.getElementById("downloadReport").addEventListener("click", async function() {
+            const startDate = document.getElementById("startDate").value;
+            const endDate = document.getElementById("endDate").value;
+
+            const response = await fetch(`/fetch-donations?start=${startDate}&end=${endDate}&download=true`);
+            
+            if (!response.ok) {
+                alert("Error generating the report!");
+                return;
+            }
+
+            // Create a link to trigger the download of the CSV file
+            const blob = await response.blob();
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "donations-report.pdf";
+            link.click();
+        });
+
+        document.getElementById("loginForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const errorMessageElement = document.getElementById("errorMessage");
+
+            // Clear any previous error message
+            errorMessageElement.style.display = "none";
+            errorMessageElement.innerText = "";
+
+            // Disable the login button to prevent multiple submits
+            const loginButton = event.target.querySelector('button');
+            loginButton.disabled = true;
+
+            // Send login request
+            const response = await fetch("/admin_login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password })
+            });
+
+            // Handle login response
+            if (response.ok) {
+                window.location.href = "/monitor";
+            } else {
+                errorMessageElement.style.display = "block";
+                errorMessageElement.innerText = "Invalid credentials. Try again.";
+            }
+
+            // Re-enable the login button after response
+            loginButton.disabled = false;
+        });
+    
 // Back to top button functionality
 window.onscroll = function () {
         scrollFunction();

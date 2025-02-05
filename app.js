@@ -1,3 +1,4 @@
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
@@ -164,6 +165,7 @@ app.get("/monitor", authMiddleware, (req, res) => {
   res.sendFile(__dirname + '/admin_dashboard.html'); // Send the Admin Dashboard HTML
 });
 
+
 // Check if admin is logged in (for checking session state)
 app.get("/check-admin-login", (req, res) => {
   if (req.session.isAdminLoggedIn) {
@@ -192,7 +194,7 @@ app.get("/fetch-donations", authMiddleware, (req, res) => {
       query += " AND date_time BETWEEN ? AND ?";
       queryParams.push(startDate, endDate);
   }
-  
+
   if (sortBy) {
       query += ` ORDER BY ${sortBy}`;
   }
@@ -205,30 +207,69 @@ app.get("/fetch-donations", authMiddleware, (req, res) => {
 
       // If "download" parameter is passed, generate and send the PDF
       if (req.query.download === 'true') {
-          const doc = new PDFDocument();
-
+          const doc = new PDFDocument({ margin: 50 });
           res.setHeader('Content-Type', 'application/pdf');
           res.setHeader('Content-Disposition', 'attachment; filename=donations-report.pdf');
+          doc.pipe(res);
 
-          doc.pipe(res); // Pipe the PDF output to the response stream
+          // Add Circular Logo at the Top (Properly Positioned)
+          const logoPath = path.join(__dirname, 'sekure_logo.jfif');
+          if (fs.existsSync(logoPath)) {
+              doc.save();
+              doc.circle(doc.page.width / 2, 70, 50).clip();
+              doc.image(logoPath, doc.page.width / 2 - 50, 20, { width: 100, height: 100 });
+              doc.restore();
+          }
 
-          doc.fontSize(20).text('Donations Report', { align: 'center' });
-          doc.moveDown();
+          // Report Title
+          doc.moveDown(6);
+          doc.fontSize(18).text('Donations Report', { align: 'center', underline: true });
+          doc.moveDown(2);
 
-          // Table header
-          doc.fontSize(12).text('Donor Name     Date          Amount');
+          // Table Header (Strictly Same Row)
+          doc.moveTo(50, doc.y).lineTo(550, doc.y).stroke();
+          doc.moveDown(0.2);
+          let startY = doc.y; // Store current y position for alignment
+
+          doc.fontSize(12).fillColor('black')
+              .text('S/N', 50, startY, { width: 50, align: 'left' })
+              .text('Donor Name', 120, startY, { width: 180, align: 'left' })
+              .text('Date', 310, startY, { width: 150, align: 'left' })
+              .text('Amount', 470, startY, { width: 80, align: 'left' });
+
+          doc.moveDown(0.2);
+          doc.moveTo(50, doc.y).lineTo(550, doc.y).stroke();
           doc.moveDown(0.5);
 
-          // Table rows
-          results.forEach(donation => {
-              doc.text(`${donation.donor_name}     ${donation.date_time}     ${donation.amount}`);
+          // Table Data (Ensuring Same Row Alignment)
+          results.forEach((donation, index) => {
+              const formattedDate = new Date(donation.date_time).toLocaleString('en-GB', {
+                  day: '2-digit', month: '2-digit', year: 'numeric',
+                  hour: '2-digit', minute: '2-digit', hour12: false
+              });
+
+              let rowY = doc.y; // Store row's Y position
+              let backgroundColor = index % 2 === 0 ? '#f0f0f0' : 'white'; // Alternating row colors
+              doc.rect(50, rowY - 2, 500, 20).fill(backgroundColor).fillColor('black');
+
+              doc.text((index + 1).toString(), 50, rowY, { width: 50, align: 'left' })
+                  .text(donation.donor_name, 120, rowY, { width: 180, align: 'left' })
+                  .text(formattedDate, 310, rowY, { width: 150, align: 'left' })
+                  .text(donation.amount.toString(), 470, rowY, { width: 80, align: 'left' });
+
+              doc.moveDown(0.5);
           });
 
-          doc.end(); // Finish the PDF generation
-          return; // End the response
+          // Signature Section
+          doc.moveDown(3);
+          doc.text('_________________________', 50, doc.y, { align: 'left' });
+          doc.text('Secretary Signature', 50, doc.y, { align: 'left' });
+
+          doc.end();
+          return;
       }
 
-      // Return data as JSON if not downloading
+      // Return JSON if not downloading
       res.json(results);
   });
 });
