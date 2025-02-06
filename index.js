@@ -223,6 +223,7 @@ document.getElementById("fetchReport").addEventListener("click", async function(
             <td>${donation.donor_name}</td>
             <td>${donation.date_time}</td>
             <td>${donation.amount}</td>
+             <td>${donation.reference}</td>
         </tr>`;
     });
     document.getElementById("reportTable").innerHTML = tableRows;
