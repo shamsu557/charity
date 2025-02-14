@@ -1,302 +1,624 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Sekure Foundation</title>
-    <meta name="google-site-verification" content="mycKC9SQwwlvQLn-w6DpZdvZn0KT2VUqJf4U0VM3-Xo">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <!-- Add this in your HTML <head> section -->
+    <title>MASMO - Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
+    <style>
+        :root {
+            --apc-green: #45b7ec;
+            --apc-blue:  #00ddff;
+            --apc-red:#82aae6;
+            --apc-white: #FFFFFF;
+        }
+        .navbar {
+            background-color: var(--apc-green) !important;
+        }
+        .hero {
+            position: relative;
+            height: 65vh;
+            overflow: hidden;
+        }
+        .hero img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures full coverage */
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    object-position: center 25%; /* Moves the image down slightly */
+}
 
-<body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Sekure Foundation</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS file -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+        .hero img.active {
+            opacity: 1;
+        }
+        .hero-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--apc-white);
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+        }
+        .hero-content h1 {
+            font-size: 2rem;
+        }
+        /* Ensure images are centered but not cropped from the top */
+img.rounded-circle {
+    width: 150px;  /* Set a fixed width for all images */
+    height: 150px;  /* Set a fixed height for all images */
+    object-fit: cover;  /* Ensure the images are cropped to fill the circle */
+    object-position: top;  /* Align the top of the image with the circle's top edge */
+    margin-bottom: 20px;  /* Add space below images */
+}
+
+        .navbar-brand {
+            font-family: 'Lobster', cursive;
+            font-size: 1.8rem;
+        }
+        .btn-primary {
+            background-color: var(--apc-blue);
+            border-color: var(--apc-blue);
+        }
+        .btn-primary:hover {
+            background-color: var(--apc-red);
+            border-color: var(--apc-red);
+        }
+        .footer {
+            background-color: var(--apc-green);
+            color: var(--apc-white);
+        }
+        .navbar-collapse {
+            text-align: center;
+        }
+        .navbar-toggler {
+            border: none;
+        }
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+        .navbar-brand {
+    display: flex;
+    align-items: center;
+    font-family: 'Poppins', sans-serif; /* Modern, clean font */
+    font-weight: bold;
+    font-size: 1.5rem; /* Adjust size as needed */
+}
+
+.brand-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover;
+    margin-right: 10px; /* Space between logo and text */
+}
+
+.brand-name {
+    color: #fff; /* Adjust based on navbar background */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Caveat', 'Poppins', 'Lobster', 'Pacifico';
+    font-size: 1.3rem; /* Adjust size as needed */
+}
+.card-img-top {
+    width: 100px; /* Set a fixed width */
+    height: 100px; /* Set a fixed height */
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover; /* Ensures it covers the area without distortion */
+    object-position: top; /* Focuses on the upper part of the image */
+    display: block;
+    margin: 10px auto 0 auto; /* Adds top margin and centers the image */
+}
+.news-card {
+    transition: transform 0.3s ease-in-out;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+
+        .close-btn {
+            position: absolute;
+            top: 0%;
+            right: 15px;
+            font-size: 24px;
+            background: none;
+            border: none;
+            color: var(--apc-white);
+        }
+        @media (max-width: 768px) {
+            .hero-content {
+                padding: 10px;
+            }
+            .hero-content h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-      
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg bg-light">
+ <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
-        <!-- Logo and Name (Sekure Foundation) -->
-        <a class="navbar-brand me-auto" href="#">
-            <img src="sekure_logo.jfif" alt="Sekure Foundation Logo" class="navbar-logo">
-            <span class="navbar-brand-name">Sekure Foundation</span>
+        <a class="navbar-brand" href="index.html">
+            <img src="Masmo.jpg" alt="MASMO Logo" class="brand-logo"> 
+            <span class="brand-name">MASMO</span>
         </a>
         
         <!-- Navbar Toggler -->
-        <button class="navbar-toggler" id="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" id="navToggle">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <button class="navbar-cancel d-lg-none" id="navbar-cancel" type="button" style="display: none;">
-            <span>&times;</span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
+        <div class="collapse navbar-collapse position-relative" id="navbarNav">
+            <!-- Close Button Inside Menu -->
+            <button class="close-btn d-lg-none" type="button" id="navClose">&times;</button>
+            <ul class="navbar-nav mx-auto">
                 <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-
-                <!-- About Section (Dropdown on Large Screens, Separate Links on Small Screens) -->
-                <li class="nav-item dropdown d-lg-block d-none">
-                    <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button">
-                        About Us
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#who-we-are">Who We Are</a></li>
-                        <li><a class="dropdown-item" href="#founder">Founder</a></li>
-                        <li><a class="dropdown-item" href="#board">Board of Trustees</a></li>
-                        <li><a class="dropdown-item" href="#team">Our Team</a></li>
-                    </ul>
-                </li>
-
-                <!-- Separate "About Us" Items for Small Screens -->
-                <li class="nav-item d-lg-none"><a class="nav-link" href="#who-we-are">Who We Are</a></li>
-                <li class="nav-item d-lg-none"><a class="nav-link" href="#founder">Founder</a></li>
-                <li class="nav-item d-lg-none"><a class="nav-link" href="#board">Board of Trustees</a></li>
-                <li class="nav-item d-lg-none"><a class="nav-link" href="#team">Our Team</a></li>
-
-                <li class="nav-item"><a class="nav-link" href="#news">News and Events</a></li>
+                <li class="nav-item"><a class="nav-link" href="excos.html">State Excos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#news">News & Feeds</a></li>
                 <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                <li class="nav-item"><a class="nav-link" href="admin_login.html">Admin</a></li> 
-                <li class="nav-item">
-                    <a class="btn btn-success text-white" href="#donate" role="button">Donate</a>
-                </li>
             </ul>
         </div>
     </div>
 </nav>
-
-<!-- Hero Section -->
-<section class="hero-section mt-3">
-    <div class="carousel-items">
-        <div class="carousel-item" 
-            data-image="team.jfif" 
-            data-message="SEKURE FOUNDATION" 
-            data-subtext="Building lasting social change for underserved communities. Empowering orphans, widows, and youth to create a brighter future together">
-        </div>    
-</section>
-   <!-- Who We Are -->
-<section id="who-we-are" class="container text-center mt-5 ">
-    <h2 class="text-white text-center bg-dark py-1">Who We Are</h2>
-     <p>Sekure Foundation is dedicated to creating sustainable social impact through initiatives aimed at feeding orphanages, eradicating poverty through empowerment programs, and assisting underprivileged individuals in achieving social integration and personal growth.</p>
-
-    <h3 class="mt-4">Sekure Foundation has the following tier programs:</h3>
-
-    <div class="row mt-4">
-        <div class="col-md-3">
-            <h4>Food Aid</h4>
-            <p>We provide nutritious meals to orphanages and vulnerable groups, ensuring no one goes hungry.</p>
-        </div>
-        <div class="col-md-3">
-            <h4>Skills Training</h4>
-            <p>We offer practical training programs to equip individuals with skills for economic independence.</p>
-        </div>
-        <div class="col-md-3">
-            <h4>Educational Support</h4>
-            <p>We provide educational materials and sponsorships to underprivileged youth for a brighter future.</p>
-        </div>
-        <div class="col-md-3">
-            <h4>Social Reintegration</h4>
-            <p>We create safe spaces and mentorship programs to help individuals integrate into society.</p>
-        </div>
-    </div>
-</section>
-
-<!-- Founder -->
-<section id="founder" class="container text-center mt-5 bg-light">
-    <h2 class="text-white text-center bg-dark py-1">About the Founder</h2>
-    <img src="founder.jpeg" alt="Founder Image" class="img-fluid rounded-circle">
-    <p class="mt-3"><strong>Ahmed Muhammed Ibrahim (Sekure)</strong> is the visionary behind the SEKURE FOUNDATION. With a deep-rooted passion for social justice and a commitment to improving the lives of underserved communities, Sekure has dedicated his life to empowering those in need.</p>
-
-    <p>Ahmed Muhammed Ibrahim (Sekure) holds a Bachelor’s degree in Geography from Bayero University Kano, a Postgraduate Diploma in Management (PGDM), and a Master’s in Public Administration. His academic foundation equipped him with a broad understanding of sustainable development and community empowerment strategies.</p>
-
-    <p>With a distinguished career working on projects with the Millennium Development Goals (MDGs) and Sustainable Development Goals (SDGs), Sekure gained extensive experience in addressing global challenges, particularly those affecting marginalized populations such as orphans, widows, and youth.</p>
-
-    <p>In 2019, motivated by a vision to create tangible change, Sekure founded SEKURE FOUNDATION. The foundation was established with the mission to provide vital support, education, feeding, and vocational training to orphans, widows, and young people, empowering them to build better futures for themselves and their communities.</p>
-
-    <p>Through SEKURE FOUNDATION, Sekure has touched countless lives, providing not only resources but also hope and opportunities for a brighter tomorrow. The foundation has become a beacon of light for marginalized populations across [Country/Region], working tirelessly to advocate for their rights and improve their quality of life.</p>
-
-    <p class="mt-3">With an unwavering belief in the power of education and sustainable development, Sekure remains committed to making the world a better place, one life at a time.</p>
-</section>
-
-<!-- Board of Trustees -->
-<section id="board" class="container text-center mt-5">
-    <h2 class="text-white text-center bg-dark py-1">Board of Trustees</h2>
-    <div class="row">
-        <div class="col-md-4">
-            <img src="founder.jpeg" class="img-fluid rounded-circle" alt="Trustee 3">
-            <h5>Ahmed Muhammed Ibrahim</h5>
-            <p>Founder and Chairman</p>
-            <p>Oversees strategic decisions, ensures smooth operation of charity programs, and leads major initiatives to serve the needy.</p>
-        </div>
-        <div class="col-md-4">
-            <img src="hajja.jfif" class="img-fluid rounded-circle" alt="Trustee 1">
-            <h5>Aisha Ibrahim Danbaba</h5>
-            <p>Co-founder</p>
-            <p>Visionary leader who established the charity to provide support for orphans, widows, youth, and underprivileged individuals.</p>
-        </div>
-        <div class="col-md-4">
-            <img src="muhammad.jfif" class="img-fluid rounded-circle" alt="Trustee 2">
-            <h5>Muhammad Sani Ahmed</h5>
-            <p>Secretary</p>
-            <p>Manages records, coordinates board meetings, and ensures proper documentation of charity activities, including reports on beneficiaries.</p>
-        </div>
-        <div class="col-md-4">
-            <img src="muhammadd.jfif" class="img-fluid rounded-circle" alt="Trustee 4">
-            <h5>Muhammad Ibrahim Danbaba</h5>
-            <p>Treasurer</p>
-            <p>Oversees daily operations, ensures efficient logistics for charity programs, and supports the team in achieving organizational goals.</p>
-        </div>
-    </div>
-</section>
-
-<!-- Our Team -->
-<section id="team" class="container text-center mt-5 bg-light">
-    <h2 class="text-white text-center bg-dark py-1">Our Team</h2>
-    <div class="row">
-        <div class="col-md-3">
-            <img src="muhammad.jfif" class="img-fluid rounded-circle" alt="Team Member 1">
-            <h5>Muhammad Sani Ahmed</h5>
-            <p>Program Coordinator</p>
-            <p>Plans and supervises charity programs such as feeding initiatives, orphanage care, and support for youth and widows.</p>
-        </div>
-        <div class="col-md-3">
-            <img src="hajja.jfif" class="img-fluid rounded-circle" alt="Team Member 2">
-            <h5>Hajja Ibrahim Danbaba</h5>
-            <p>Community Engagement Officer</p>
-            <p>Acts as a liaison between the charity and communities, ensuring the needs of widows, youth, and underprivileged individuals are addressed.</p>
-        </div>
-        <div class="col-md-3">
-            <img src="passport.jpg" class="img-fluid rounded-circle" alt="Team Member 3">
-            <h5>Shamsu Sabo</h5>
-            <p>IT and Digital Support Lead</p>
-            <p>Manages the charity's online presence, facilitates digital outreach for donors, and ensures effective communication with beneficiaries.</p>
-        </div>
-    </div>
-</section>
-
-
-<!-- Donate Container (Centered) -->
-<div class="container d-flex justify-content-center mt-4" >
-    <div class="col-lg-6 col-md-8 col-sm-10 text-center" id="donate" >
-        <h2 class="text-white text-center bg-dark py-1">Donate</h2>
-        <p>Your generous donations help us support orphans, widows, divorced women, and underprivileged youth in our community. Please consider making a contribution to help us continue our mission.</p>
+<!-- Hero Section for About Page -->
+<header class="hero">
+    <img src="Hero4.jpg" class="active" alt="Hero Image">
+    <div class="hero-content">
         <div>
-            <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#donateModal">Donate Now</a>
+            <h1 class="fw-bold">About MASMO</h1>
+            <p class="lead">Maliya Shitu Media Organization (MASMO) is dedicated to promoting the leadership and vision of Distinguished Senator Barau I. Jibrin, the Deputy Senate President of Nigeria.</p>
+            <a href="register.html" class="btn btn-outline-success btn-lg">Register Now</a>
         </div>
     </div>
-</div>
+</header>
+<!-- About Us Section -->
+<section class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 text-center">
+            <h1 class="fw-bold">About Us</h1>
+            <p class="lead">
+                <p class="lead">
+                    <strong>Maliya Shitu Media Organization (MASMO)</strong> is a dedicated media platform established 
+                    to **champion the political vision, leadership, and achievements** of 
+                    <strong>Distinguished Senator Barau I. Jibrin</strong>, the Deputy Senate President of Nigeria.  
+                    As a voice for progress, MASMO is committed to bridging the gap between leadership and the people 
+                    by effectively communicating policies, programs, and developmental strides.
+                </p>
+                <p class="lead">
+                    At MASMO, we believe in **the power of media as a tool for awareness, education, and engagement**.  
+                    Through strategic media campaigns, grassroots outreach, and digital storytelling, we highlight 
+                    **Senator Barau I. Jibrin’s contributions to governance, economic growth, and national unity**.  
+                    Our mission is to **empower citizens with accurate information**, foster political awareness, 
+                    and strengthen the bond between leadership and the electorate.
+                </p>
+                <p class="lead">
+                    With a commitment to **integrity, inclusivity, and transparency**, MASMO serves as a dynamic force 
+                    in shaping public discourse, ensuring that the senator’s impact is recognized at the local, national, and global levels.  
+                    We are more than a media organization; we are a movement for progress.
+                </p>
+            </p>
+        </div>
+    </div>
+</section>
 
-<!-- Donation Modal -->
-<div class="modal fade" id="donateModal" tabindex="-1" aria-labelledby="donateModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="donateModalLabel">Make a Donation</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<!-- Vision Section -->
+<section class="container py-5 bg-light">
+    <div class="row justify-content-center">
+        <div class="col-md-10 text-center">
+            <h1 class="fw-bold">Our Vision</h1>
+            <p class="lead">
+                To be a leading media organization that strengthens political awareness, fosters unity, and amplifies the impact of progressive leadership in Nigeria.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Mission Section -->
+<section class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 text-center">
+            <h1 class="fw-bold">Our Mission</h1>
+            <p class="lead">
+                Our mission is to utilize media as a tool for transparency, education, and engagement, ensuring that the policies and achievements of 
+                <strong>Senator Barau I. Jibrin</strong> reach the grassroots and beyond. We strive to empower citizens with accurate information, promote civic responsibility, 
+                and contribute to national development.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="container py-5">
+    <h2 class="text-center mb-4 bg-light">State Key Executives</h2>
+    <div class="row">
+        <!-- Executive Members -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="shitu1.jpg" class="card-img-top" alt="Auwal Muhammad Akushi">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/01</h5>
+                    <p class="fw-bold">Auwal Muhammad Akushi</p>
+                    <p class="card-text">State Chairman</p>
+                </div>
             </div>
-            <div class="modal-body">
-                <form id="donationForm">
-                    <div class="mb-3">
-                        <label for="donorName" class="form-label">Full Name</label>
-                        <input type="text" class="form-control" id="donorName" name="donorName" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="donorEmail" class="form-label">Email (Optional)</label>
-                        <input type="email" class="form-control" id="donorEmail" name="donorEmail">
-                    </div>
-                    <div class="mb-3">
-                        <label for="donorPhone" class="form-label">Phone Number (Optional)</label>
-                        <input type="text" class="form-control" id="donorPhone" name="donorPhone">
-                    </div>
-                    <div class="mb-3">
-                        <label for="amount" class="form-label">Amount (NGN)</label>
-                        <input type="number" class="form-control" id="amount" name="amount" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="country" class="form-label">Country</label>
-                        <input type="text" class="form-control" id="country" name="country" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="state" class="form-label">State</label>
-                        <input type="text" class="form-control" id="state" name="state" required>
-                    </div>
-                    <div class="text-center">
-                        <button  type="button" class="btn btn-success" onclick="initiatePayment()">Donate</button>
-                    </div>
-                </form>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="Masmo.jpg" class="card-img-top" alt="Abubakar Yahaya Matinko">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/02</h5>
+                    <p class="fw-bold">Abubakar Yahaya Matinko</p>
+                    <p class="card-text">Vice Chairman</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="images/exco3.jpg" class="card-img-top" alt="Ibrahim Makwarari">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/03</h5>
+                    <p class="fw-bold">Ibrahim Makwarari</p>
+                    <p class="card-text">State Secretary</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="images/exco4.jpg" class="card-img-top" alt="Rabiu Ahmad">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/04</h5>
+                    <p class="fw-bold">Rabiu Ahmad</p>
+                    <p class="card-text">Assistant Secretary</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="images/exco5.jpg" class="card-img-top" alt="Umar Sayyadi Muhammad">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/05</h5>
+                    <p class="fw-bold">Umar Sayyadi Muhammad</p>
+                    <p class="card-text">State DG Media</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="images/exco6.jpg" class="card-img-top" alt="Auwal Mamman">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/06</h5>
+                    <p class="fw-bold">Auwal Mamman</p>
+                    <p class="card-text">Organizing Secretary</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="images/exco7.jpg" class="card-img-top" alt="Nura Sayyadi Muhammad">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/07</h5>
+                    <p class="fw-bold">Nura Sayyadi Muhammad</p>
+                    <p class="card-text">Assistant Organizing Secretary</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="images/exco8.jpg" class="card-img-top" alt="Shu’abu Mai Kokara">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/08</h5>
+                    <p class="fw-bold">Shu’abu Mai Kokara</p>
+                    <p class="card-text">Financial Secretary</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="images/exco9.jpg" class="card-img-top" alt="Nafiu Jalo">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/09</h5>
+                    <p class="fw-bold">Nafiu Jalo</p>
+                    <p class="card-text">Youth Leader</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="images/exco10.jpg" class="card-img-top" alt="Ismal Sharif Bala">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/10</h5>
+                    <p class="fw-bold">Ismal Sharif Bala</p>
+                    <p class="card-text">Deputy Youth Leader</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="images/exco11.jpg" class="card-img-top" alt="Zainab Muhammad">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/11</h5>
+                    <p class="fw-bold">Zainab Muhammad</p>
+                    <p class="card-text">Woman Leader</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="images/exco12.jpg" class="card-img-top" alt="Sadiya Muhammad">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/12</h5>
+                    <p class="fw-bold">Sadiya Muhammad</p>
+                    <p class="card-text">Deputy Woman Leader</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="images/exco13.jpg" class="card-img-top" alt="Mahmud Ahmad">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/13</h5>
+                    <p class="fw-bold">Mahmud Ahmad</p>
+                    <p class="card-text">PRO</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="images/exco14.jpg" class="card-img-top" alt="Nasiru Ibrahim">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/14</h5>
+                    <p class="fw-bold">Nasiru Ibrahim</p>
+                    <p class="card-text">Welfare Director</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="images/exco15.jpg" class="card-img-top" alt="Shafaatu Isa Bello">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/15</h5>
+                    <p class="fw-bold">Shafaatu Isa Bello</p>
+                    <p class="card-text">Deputy Welfare Director</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="images/exco16.jpg" class="card-img-top" alt="Shazali Yusuf Danjaji">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/16</h5>
+                    <p class="fw-bold">Shazali Yusuf Danjaji</p>
+                    <p class="card-text">Treasurer</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="images/exco17.jpg" class="card-img-top" alt="Sumayya Abubakar">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/17</h5>
+                    <p class="fw-bold">Sumayya Abubakar</p>
+                    <p class="card-text">Auditor</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="images/exco18.jpg" class="card-img-top" alt="Aminu Ibrahim Dantata">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/18</h5>
+                    <p class="fw-bold">Aminu Ibrahim Dantata</p>
+                    <p class="card-text">Kano-Central Chairman</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="images/exco19.jpg" class="card-img-top" alt="Bintaisah Dala">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/19</h5>
+                    <p class="fw-bold">Bintaisah Dala</p>
+                    <p class="card-text">Kano-Central Woman Leader</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="images/exco20.jpg" class="card-img-top" alt="Alh. Ibrahim Girma Tsanyawa">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/20</h5>
+                    <p class="fw-bold">Alh. Ibrahim Girma Tsanyawa</p>
+                    <p class="card-text">Kano-North Chairman</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="images/exco21.jpg" class="card-img-top" alt="Sadiya Bichi">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/21</h5>
+                    <p class="fw-bold">Sadiya Bichi</p>
+                    <p class="card-text">Kano-North Woman Leader</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="images/exco22.jpg" class="card-img-top" alt="Auwal Yunusa">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/22</h5>
+                    <p class="fw-bold">Auwal Yunusa</p>
+                    <p class="card-text">Kano-South Chairman</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="images/exco23.jpg" class="card-img-top" alt="Hafsat Abdul Yusuf">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/23</h5>
+                    <p class="fw-bold">Hafsat Abdul Yusuf</p>
+                    <p class="card-text">Kano-South Woman Leader</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="images/exco24.jpg" class="card-img-top" alt="Bilkisu Abdullahi">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/24</h5>
+                    <p class="fw-bold">Bilkisu Abdullahi</p>
+                    <p class="card-text">TikTok Leader</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="images/exco25.jpg" class="card-img-top" alt="Salma Usman Musa">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/25</h5>
+                    <p class="fw-bold">Salma Usman Musa</p>
+                    <p class="card-text">Deputy TikTok Leader</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="images/exco26.jpg" class="card-img-top" alt="Hafsat Mansur Gwale">
+                <div class="card-body text-center">
+                    <h5 class="card-title">MASMO/KN/25/26</h5>
+                    <p class="fw-bold">Hafsat Mansur Gwale</p>
+                    <p class="card-text">Deputy Instagram Leader</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Repeat for all other executives -->
+    </div>
+</section>
+<!-- News & Feeds Section -->
+<section class="container py-5" id="news">
+    <h2 class="text-center mb-4">Latest News & Feeds</h2>
+    <div class="row">
+        <!-- News Item 1 -->
+        <div class="col-md-4">
+            <div class="card news-card h-100">
+                <img src="news1.jpg" class="card-img-top" alt="News Image">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">MASMO Expands Media Outreach</h5>
+                    <p class="card-text flex-grow-1">MASMO is taking bold steps to strengthen its media presence in Nigeria, promoting the achievements of Senator Barau I. Jibrin.</p>
+                    <a href="#" class="btn btn-primary mt-auto">Read More</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- News Item 2 -->
+        <div class="col-md-4">
+            <div class="card news-card h-100">
+                <img src="news2.jpg" class="card-img-top" alt="News Image">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Senator Barau Hosts Youth Empowerment Forum</h5>
+                    <p class="card-text flex-grow-1">In a bid to support youth development, Senator Barau I. Jibrin organized a leadership summit for young entrepreneurs.</p>
+                    <a href="#" class="btn btn-primary mt-auto">Read More</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- News Item 3 -->
+        <div class="col-md-4">
+            <div class="card news-card h-100">
+                <img src="news3.jpg" class="card-img-top" alt="News Image">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">MASMO Launches Digital Media Campaign</h5>
+                    <p class="card-text flex-grow-1">A new campaign has been launched to increase digital engagement and promote grassroots political awareness.</p>
+                    <a href="#" class="btn btn-primary mt-auto">Read More</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
- <!-- Footer -->
-<footer class="footer bg-light text-dark mt-3 py-3">
-    <div class="container">
-        <div class="text-center mb-2">
-            <h6 class="mb-1">Ready to Make a Difference?</h6>
-            <p class="small mb-2">Join us in transforming lives and empowering communities. Get involved or support our mission today!</p>
-        </div>
-    </div>
-        <div class="row text-center">
-            <div class="col-6">
-                <h6 class="mb-1">Call Us</h6>
-                <p class="small mb-0">08064228515</p>
-                <p class="small mb-0">08030909793</p>
-            </div>
-            <div class="col-6">
-                <h6 class="mb-1">Email Us</h6>
-                <p class="small mb-0">info@sekurefoundation.com.ng</p>
-            </div>
-        </div>
-
-        <div class="text-center mb-2">
-            <h6 class="mb-1">Visit Us</h6>
-            <p class="small mb-0">Sekure Foundation</p>
-            <p class="small mb-0">Dan Pass Royal Plaza Zoo Road, Kano, Kano State, Nigeria</p>
-        </div>
-
-        <div class="social-icons text-center mt-2">
-            <a href="https://www.facebook.com" target="_blank" class="text-white me-2" aria-label="Facebook">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="https://www.twitter.com" target="_blank" class="text-white me-2" aria-label="Twitter">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="https://www.instagram.com" target="_blank" class="text-white me-2" aria-label="Instagram">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://www.linkedin.com" target="_blank" class="text-white" aria-label="LinkedIn">
-                <i class="fab fa-linkedin-in"></i>
-            </a>
-        </div>
-
-        <div class="text-center mt-2">
-            <p class="small mb-0">&copy; Sekure Foundation. All rights reserved.</p>
-        </div>
-        
-<!-- Back to top button -->
-<button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+</section>
 
 
-<!-- Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-<script src="index.js"></script>
+    <!-- Footer -->
+    <footer class="footer text-center py-3">
+        <p>Follow us on:</p>
+        <a href="#" class="text-white me-3">Facebook</a>
+        <a href="#" class="text-white me-3">Twitter</a>
+        <a href="#" class="text-white me-3">Instagram</a>
+        <a href="#" class="text-white">YouTube</a>
+        <p class="mt-3">&copy; 2025 MASMO. All Rights Reserved.</p>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let images = document.querySelectorAll('.hero img');
+        let index = 0;
+
+        function changeImage() {
+            images[index].classList.remove('active');
+            index = (index + 1) % images.length;
+            images[index].classList.add('active');
+        }
+
+        setInterval(changeImage, 5000);
+        document.addEventListener("DOMContentLoaded", function () {
+        const navToggle = document.getElementById("navToggle");
+        const navClose = document.getElementById("navClose");
+        const navbarNav = document.getElementById("navbarNav");
+
+        navToggle.addEventListener("click", function () {
+            navbarNav.classList.add("show");
+            navToggle.style.display = "none";
+        });
+
+        navClose.addEventListener("click", function () {
+            navbarNav.classList.remove("show");
+            navToggle.style.display = "block";
+        });
+    });
+    </script>
 </body>
 </html>
