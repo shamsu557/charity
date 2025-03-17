@@ -64,17 +64,20 @@ app.get("/logout", (req, res) => {
   });
 });
 
-// Nodemailer transporter configuration
+
+// Nodemailer transporter configuration for custom email server
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "mail.sekurefoundation.org.ng", // Custom mail server
+  port: 465, // Use 465 for SSL, or 587 for TLS
+  secure: true, // true for SSL, false for TLS
   auth: {
-    user: "1440shamsusabo@gmail.com", // Your Gmail address
-    pass: "vtov gebw xzgh uwui", // App password
+    user: "info@sekurefoundation.org.ng",
+    pass: "Sekure@2025", // Actual email password
   },
 });
 
 // Contact form submission route
-app.post("/send-message", (req, res) => {
+app.post("/send-message", async (req, res) => {
   const { name, email, message } = req.body;
 
   if (!name || !email || !message) {
@@ -83,8 +86,8 @@ app.post("/send-message", (req, res) => {
 
   const mailOptions = {
     from: `"${name}" <${email}>`,
-    to: "1440shamsusabo@gmail.com",
-    subject: `New Contact Form Submission from ${name}`,
+    to: "info@sekurefoundation.org.ng",
+    subject: `Message from ${name}`,
     text: `You have a new message from your website contact form:
 
 Name: ${name}
@@ -92,16 +95,24 @@ Email: ${email}
 Message: ${message}`,
   };
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error("Error sending email:", error);
-      return res.status(500).json({ error: "Failed to send your message. Please try again later." });
-    }
+  try {
+    const info = await transporter.sendMail(mailOptions);
     console.log("Email sent: " + info.response);
     return res.status(200).json({ message: "Your message has been sent successfully!" });
-  });
+  } catch (error) {
+    console.error("Error sending email:", error);
+    return res.status(500).json({ error: "Failed to send your message. Please try again later." });
+  }
 });
 
+// Verify SMTP connection
+transporter.verify((error, success) => {
+  if (error) {
+    console.error("SMTP connection error:", error);
+  } else {
+    console.log("SMTP is ready to send emails.");
+  }
+});
 // Donation route
 app.post("/donate", (req, res) => {
   const { donorName, donorEmail, donorPhone, amount, country, state, reference } = req.body;
