@@ -5,7 +5,6 @@ const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
 const db = require("./mysql"); // Ensure mysql.js is configured correctly
 const fs = require("fs");
-const multer = require("multer");
 const session = require("express-session");
 const PDFDocument = require('pdfkit');
 

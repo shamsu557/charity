@@ -205,14 +205,14 @@
 }
 
 /* Headings and Paragraph styles inside the caption */
-.carousel-caption h2 {
-    font-size: 3rem; /* Prominent text size */
+.carousel-caption h5 {
+    font-size: 1.5rem; /* Prominent text size */
     font-weight: 900; /* Very bold */
     margin: 0;
 }
 
 .carousel-caption p {
-    font-size: 1.5rem; /* Slightly smaller than h2 */
+    font-size: 1rem; /* Slightly smaller than h2 */
     font-weight: 700; /* Bold text */
     margin: 10px 0 0; /* Spacing below heading */
 }
