@@ -209,43 +209,46 @@ document.getElementById("logoutBtn").addEventListener("click", async function() 
         window.location.href = "/admin_login.html" //logout for dashboard
     }
 });
-
-document.getElementById("fetchReport").addEventListener("click", async function() {
-    const startDate = document.getElementById("startDate").value;
-    const endDate = document.getElementById("endDate").value;
-    
-    const response = await fetch(`/fetch-donations?start=${startDate}&end=${endDate}`);
-    const data = await response.json();
-    
-    let tableRows = "";
-    data.forEach(donation => {
-        tableRows += `<tr>
-            <td>${donation.donor_name}</td>
-            <td>${donation.date_time}</td>
-            <td>${donation.amount}</td>
-             <td>${donation.reference}</td>
-        </tr>`;
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("fetchReport").addEventListener("click", async function() {
+        const startDate = document.getElementById("startDate").value;
+        const endDate = document.getElementById("endDate").value;
+        
+        const response = await fetch(`/fetch-donations?start=${startDate}&end=${endDate}`);
+        const data = await response.json();
+        
+        let tableRows = "";
+        data.forEach(donation => {
+            tableRows += `<tr>
+                <td>${donation.donor_name}</td>
+                <td>${donation.date_time}</td>
+                <td>${donation.amount}</td>
+                <td>${donation.reference}</td>
+            </tr>`;
+        });
+        document.getElementById("reportTable").innerHTML = tableRows;
     });
-    document.getElementById("reportTable").innerHTML = tableRows;
-});
 
-document.getElementById("downloadReport").addEventListener("click", async function() {
-    const startDate = document.getElementById("startDate").value;
-    const endDate = document.getElementById("endDate").value;
+    document.getElementById("downloadReport").addEventListener("click", async function() {
+        const startDate = document.getElementById("startDate").value;
+        const endDate = document.getElementById("endDate").value;
 
-    const response = await fetch(`/fetch-donations?start=${startDate}&end=${endDate}&download=true`);
-    
-    if (!response.ok) {
-        alert("Error generating the report!");
-        return;
-    }
+        const response = await fetch(`/fetch-donations?start=${startDate}&end=${endDate}&download=true`);
+        
+        if (!response.ok) {
+            alert("Error generating the report!");
+            return;
+        }
 
-    // Create a link to trigger the download of the CSV file
-    const blob = await response.blob();
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "donations-report.pdf";
-    link.click();
+        // Create a link to trigger the download of the CSV file
+        const blob = await response.blob();
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "donations-report.pdf";
+        document.body.appendChild(link); // Append to body
+        link.click();
+        document.body.removeChild(link); // Clean up
+    });
 });
 
  // Handling form submission
