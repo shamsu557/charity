@@ -1,22 +1,24 @@
 const mysql = require('mysql');
-
-// MySQL database connection configuration
+//MySQL database connection configuration
 const dbConfig = {
-    host: process.env.DB_HOST || 'mysql-shamsu557.alwaysdata.net',  // Use environment variable or default
+    host: process.env.DB_HOST || '195.250.27.35',  // Use environment variable or default
     port: process.env.DB_PORT || 3306,                       // Default MySQL port or environment variable
-    user: process.env.DB_USER || 'shamsu557',               // MySQL username from environment
+    user: process.env.DB_USER || 'sekurefo_shamsu557',               // MySQL username from environment
     password: process.env.DB_PASSWORD || '@Shamsu1440',       // MySQL password from environment
-    database: process.env.DB_NAME || 'shamsu557_school_database'            // Database name from environment
+    database: process.env.DB_NAME || 'sekurefo_dbase'            // Database name from environment
 };
 
-// se connection configuration
+
+// // MySQL database connection configuration
 // const dbConfig = {
-//     host: process.env.DB_HOST || 'sql3.freesqldatabase.com',  // Use environment variable or default
+//     host: process.env.DB_HOST || 'mysql-shamsu557.alwaysdata.net',  // Use environment variable or default
 //     port: process.env.DB_PORT || 3306,                       // Default MySQL port or environment variable
-//     user: process.env.DB_USER || 'sql3749419',               // MySQL username from environment
-//     password: process.env.DB_PASSWORD || 'tSZTsnx4qx',       // MySQL password from environment
-//     database: process.env.DB_NAME || 'sql3749419'            // Database name from environment
+//     user: process.env.DB_USER || 'shamsu557',               // MySQL username from environment
+//     password: process.env.DB_PASSWORD || '@Shamsu1440',       // MySQL password from environment
+//     database: process.env.DB_NAME || 'shamsu557_school_database'            // Database name from environment
 // };
+
+
 
 // Create MySQL connection
 const db = mysql.createConnection(dbConfig);

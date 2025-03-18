@@ -30,6 +30,10 @@ app.use(express.static(path.join(__dirname)));
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
+app.get("/sekure", (req, res) => {
+  res.sendFile(path.join(__dirname, "creation.html"));
+});
+
 
 function isAuthenticated(req, res, next) {
   if (req.session.loggedin) {
@@ -137,88 +141,67 @@ app.post("/donate", (req, res) => {
   });
 });
 
-// Serve the creation page (creation.html)
-app.get('/creation', (req, res) => {
-  res.sendFile(path.join(__dirname, 'creation.html'));
-});
-// Admin login route (for validating the admin before showing the signup form)
-app.post('/admin_create_login', (req, res) => {
-  const { username, password } = req.body;
+app.post('/admin-signup', (req, res) => {
+  const { fullName, email, phone, username, password, role } = req.body;
 
-  // Query to fetch admin credentials from the database
-  const query = 'SELECT * FROM admin WHERE username = ?';
-  db.query(query, [username], (err, result) => {
+  // Validate input
+  if (!fullName || !email || !username || !password || !role) {
+      return res.json({ success: false, message: 'All required fields must be filled!' });
+  }
+
+  // Hash the password before storing it
+  const saltRounds = 10;
+  bcrypt.hash(password, saltRounds, (err, hashedPassword) => {
       if (err) {
-          console.log(err);
-          return res.status(500).send('Database error');
+          console.error('Error hashing password:', err);
+          return res.json({ success: false, message: 'Error securing password' });
       }
 
-      if (result.length === 0) {
-          return res.status(400).send('Invalid credentials');
-      }
-
-      // Compare the provided password with the stored hashed password
-      bcrypt.compare(password, result[0].password, (err, match) => {
+      // Insert new admin into database
+      const insertQuery = 'INSERT INTO admins (fullName, email, phone, username, password, role) VALUES (?, ?, ?, ?, ?, ?)';
+      db.query(insertQuery, [fullName, email, phone, username, hashedPassword, role], (err, result) => {
           if (err) {
-              console.log(err);
-              return res.status(500).send('Error comparing passwords');
+              console.error('Database error:', err);
+              return res.json({ success: false, message: 'Failed to create admin. Try again.' });
           }
-
-          if (!match) {
-              return res.status(400).send('Invalid credentials');
-          }
-
-          // Successful login, allow access to the creation page
-          res.status(200).send('Login successful');
+          res.json({ success: true, message: 'Admin created successfully!' });
       });
   });
 });
-
-// Admin signup route (for creating a new admin account)
-app.post('/create', (req, res) => {
-  const { name, phone, username, password, role } = req.body;
-
-  // Hash the password
-  bcrypt.hash(password, 10, (err, hashedPassword) => {
-      if (err) {
-          return res.status(500).send('Error hashing password');
-      }
-
-      // Insert new admin data into the database
-      const query = 'INSERT INTO admin (name, phone, username, password, role) VALUES (?, ?, ?, ?, ?)';
-      db.query(query, [name, phone, username, hashedPassword, role], (err, result) => {
-          if (err) {
-              console.log(err);
-              return res.status(500).send('Error saving data to database');
-          }
-          res.status(200).send('Admin created successfully');
-      });
-  });
-});
-
-
-// Admin login route
 app.post('/admin_login', (req, res) => {
-  const { username, password } = req.body;
+    const { username, password } = req.body;
 
-  // Check if username exists in the database
-  const query = 'SELECT * FROM admin WHERE username = ?';
-  db.query(query, [username], (err, result) => {
-    if (err || result.length === 0) {
-      return res.status(401).send('Invalid credentials');
-    }
+    // Check if username exists in the database
+    const query = 'SELECT * FROM admins WHERE username = ?';
+    db.query(query, [username], (err, result) => {
+        if (err) {
+            console.error('Database error:', err);
+            return res.status(500).send('Internal server error'); // Avoid exposing database errors
+        }
 
-    // Compare the password with the hashed password stored in the database
-    bcrypt.compare(password, result[0].password, (err, isMatch) => {
-      if (err || !isMatch) {
-        return res.status(401).send('Invalid credentials');
-      }
+        if (result.length === 0) {
+            return res.status(401).send('Invalid credentials');
+        }
 
-      // Create session after successful login
-      req.session.isAdminLoggedIn = true;
-      return res.redirect('/path.html'); // Redirect to path.html after successful login
+        // Compare the password with the hashed password stored in the database
+        bcrypt.compare(password, result[0].password, (err, isMatch) => {
+            if (err) {
+                console.error('Bcrypt error:', err);
+                return res.status(500).send('Internal server error');
+            }
+
+            if (!isMatch) {
+                return res.status(401).send('Invalid credentials');
+            }
+
+            // Create session after successful login
+            req.session.isAdminLoggedIn = true;
+
+            // Redirect to the dashboard or admin panel
+            res.redirect('/path.html');
+            res.end(); // Ensure no further processing
+        });
     });
-  });
 });
 
 
