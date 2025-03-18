@@ -236,9 +236,10 @@ app.post("/adminLogout", (req, res) => {
   });
 });
 
+
 // Fetch Donations Report (Protected Route)
 app.get("/fetch-donations", authMiddleware, (req, res) => {
-  let { startDate, endDate, sortBy } = req.query;
+  let { startDate, endDate, sortBy, download } = req.query;
   let query = "SELECT * FROM donations WHERE 1";
   let queryParams = [];
 
@@ -247,7 +248,9 @@ app.get("/fetch-donations", authMiddleware, (req, res) => {
     queryParams.push(startDate, endDate);
   }
 
-  if (sortBy) {
+  // Prevent SQL Injection by allowing only specific columns for sorting
+  const allowedSortColumns = ["date_time", "amount", "donor_name"];
+  if (sortBy && allowedSortColumns.includes(sortBy)) {
     query += ` ORDER BY ${sortBy}`;
   }
 
@@ -257,14 +260,16 @@ app.get("/fetch-donations", authMiddleware, (req, res) => {
       return res.status(500).json({ message: "Error fetching donations" });
     }
 
-    if (req.query.download === 'true') {
+    if (download === "true") {
       const doc = new PDFDocument({ margin: 50 });
-      res.setHeader('Content-Type', 'application/pdf');
-      res.setHeader('Content-Disposition', 'attachment; filename=donations-report.pdf');
+      res.setHeader("Content-Type", "application/pdf");
+      res.setHeader("Content-Disposition", "attachment; filename=donations-report.pdf");
       doc.pipe(res);
 
-      // Add Circular Logo at the Top (Properly Positioned)
-      const logoPath = path.join(__dirname, 'sekure_logo.jfif');
+      // Add Circular Logo at the Top
+      const logoPath = path.join(__dirname, "sekure-logo.jpg");
+      console.log("Logo Path:", logoPath);
+
       if (fs.existsSync(logoPath)) {
         doc.save();
         doc.circle(doc.page.width / 2, 70, 50).clip();
@@ -273,49 +278,56 @@ app.get("/fetch-donations", authMiddleware, (req, res) => {
       }
 
       doc.moveDown(6);
-      doc.fontSize(18).text('Donations Report', { align: 'center', underline: true });
+      doc.fontSize(18).text("Donations Report", { align: "center", underline: true });
       doc.moveDown(2);
 
-  // Table Header
-doc.moveTo(30, doc.y).lineTo(650, doc.y).stroke(); // Adjust starting x position to 30
-doc.moveDown(0.2);
-let startY = doc.y;
+      // Table Header
+      doc.moveTo(30, doc.y).lineTo(650, doc.y).stroke();
+      doc.moveDown(0.2);
+      let startY = doc.y;
 
-doc.fontSize(12).fillColor('black')
-  .text('S/N', 35, startY, { width: 50, align: 'left' })  // Shifted left to 35
-  .text('Donor Name', 95, startY, { width: 180, align: 'left' })  // Shifted left to 95
-  .text('Date', 250, startY, { width: 150, align: 'left' })  // Shifted left to 250
-  .text('Amount', 410, startY, { width: 80, align: 'left' })  // Shifted left to 410
-  .text('Reference', 500, startY, { width: 100, align: 'left' });  // Shifted left to 500
+      doc.fontSize(12).fillColor("black")
+        .text("S/N", 35, startY, { width: 50, align: "left" })
+        .text("Donor Name", 95, startY, { width: 180, align: "left" })
+        .text("Date", 250, startY, { width: 150, align: "left" })
+        .text("Amount", 410, startY, { width: 80, align: "left" })
+        .text("Reference", 500, startY, { width: 100, align: "left" });
 
-doc.moveDown(0.2);
-doc.moveTo(30, doc.y).lineTo(650, doc.y).stroke(); // Adjusted the starting x to 30 for line
-doc.moveDown(0.5);
+      doc.moveDown(0.2);
+      doc.moveTo(30, doc.y).lineTo(650, doc.y).stroke();
+      doc.moveDown(0.5);
 
-// Table Data
-results.forEach((donation, index) => {
-  const formattedDate = new Date(donation.date_time).toLocaleString('en-GB', {
-      day: '2-digit', month: '2-digit', year: 'numeric',
-      hour: '2-digit', minute: '2-digit', hour12: false
-  });
+      // Table Data
+      results.forEach((donation, index) => {
+        const formattedDate = donation.date_time
+          ? new Date(donation.date_time).toLocaleString("en-GB", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: false,
+            })
+          : "N/A";
 
-  let rowY = doc.y;
-  let backgroundColor = index % 2 === 0 ? '#f0f0f0' : 'white';
-  doc.rect(30, rowY - 2, 600, 20).fill(backgroundColor).fillColor('black'); // Adjusted x position to 30
+        let rowY = doc.y;
+        doc.fillColor(index % 2 === 0 ? "gray" : "white");
+        doc.rect(30, rowY - 2, 600, 20).fill();
+        doc.fillColor("black"); // Reset text color
 
-  doc.text((index + 1).toString(), 35, rowY, { width: 50, align: 'left' })  // Shifted left to 35
-     .text(donation.donor_name, 95, rowY, { width: 180, align: 'left' })  // Shifted left to 95
-     .text(formattedDate, 250, rowY, { width: 150, align: 'left' })  // Shifted left to 250
-     .text(donation.amount.toString(), 410, rowY, { width: 80, align: 'left' })  // Shifted left to 410
-     .text(donation.reference || 'N/A', 500, rowY, { width: 100, align: 'left' }); // Shifted left to 500
+        doc.text((index + 1).toString(), 35, rowY, { width: 50, align: "left" })
+          .text(donation.donor_name, 95, rowY, { width: 180, align: "left" })
+          .text(formattedDate, 250, rowY, { width: 150, align: "left" })
+          .text(donation.amount.toString(), 410, rowY, { width: 80, align: "left" })
+          .text(donation.reference || "N/A", 500, rowY, { width: 100, align: "left" });
 
-  doc.moveDown(0.5);
-});
+        doc.moveDown(0.5);
+      });
 
       // Signature Section
       doc.moveDown(3);
-      doc.text('_________________________', 50, doc.y, { align: 'left' });
-      doc.text('Secretary Signature', 50, doc.y, { align: 'left' });
+      doc.text("_________________________", 50, doc.y, { align: "left" });
+      doc.text("Secretary Signature", 50, doc.y, { align: "left" });
 
       doc.end();
       return;
