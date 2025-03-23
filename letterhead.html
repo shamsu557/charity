@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sekure Charity and Empowerment Foundation Letterhead</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .letterhead {
+            margin: 20px;
+            padding: 20px;
+            border: 2px solid #000;
+        }
+        .logo {
+            width: 100px;
+            height: auto;
+        }
+        .header, .footer {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+        }
+        @media print {
+            .footer { 
+                position: fixed;
+                bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container letterhead">
+    <div class="row">
+        <div class="col-12 text-center">
+            <img src="sekure-logo.png" alt="Sekure Logo" class="logo">
+        </div>
+        <div class="col-12 text-center header">
+            <h1>Sekure Charity and Empowerment Foundation</h1>
+            <p>Dan Pass Royal Plaza Zoo Road, Kano, Kano State, Nigeria</p>
+            <p>Email: info@sekurefoundation.org.ng | Phone: 08064228515</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <p>Dear [Recipient Name],</p>
+            <p>[Letter Content]</p>
+            <p>Sincerely,</p>
+            <p>Sekure Charity and Empowerment Foundation</p>
+        </div>
+    </div>
+    <div class="footer">
+        <p>&copy; 2025 Sekure Charity and Empowerment Foundation. All rights reserved.</p>
+    </div>
+</div>
+<button id="download-pdf" class="btn btn-primary">Download as PDF</button>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+<script>
+    document.getElementById('download-pdf').addEventListener('click', function() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        doc.html(document.querySelector('.letterhead'), {
+            callback: function (doc) {
+                doc.save('sekure_letterhead.pdf');
+            },
+            x: 10,
+            y: 10
+        });
+    });
+</script>
+</body>
+</html>
