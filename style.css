@@ -337,3 +337,39 @@ img.rounded-circle {
       .alert {
         display: none;
       }
+/* Ensure all images have the same height */
+.news-image {
+    height: 400px; /* Set a fixed height */
+    object-fit: cover; /* Maintain aspect ratio without stretching */
+    width: 100%;
+}
+
+/* Full overlay covering the image */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Dark overlay for text contrast */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Center the text inside overlay */
+.overlay-content {
+    color: white;
+    padding: 20px;
+    max-width: 80%;
+}
+
+.overlay h5 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.overlay p {
+    font-size: 16px;
+}
